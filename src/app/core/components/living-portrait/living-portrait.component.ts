@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 @Component({
@@ -19,10 +20,26 @@ export class LivingPortraitComponent implements OnInit {
     if (!this.canvas) return;
 
     const canvas = this.canvas.nativeElement;
-
     const scene = new THREE.Scene();
+    const loader = new GLTFLoader();
+    let model, skeleton;
 
-    const material = new THREE.MeshToonMaterial();
+    loader.load('/3d-models/cartoonguy.glb', function (gltf) {
+      model = gltf.scene;
+
+      scene.add(model);
+
+
+      skeleton = new THREE.SkeletonHelper( model );
+      skeleton.visible = false
+
+      if(skeleton.bones[220].parent?.parent?.parent){
+        skeleton.bones[220].parent.parent.rotation.z = 2
+      }
+      scene.add( skeleton );
+    }, undefined, function (error) {
+      console.error(error);
+    });
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
@@ -33,32 +50,20 @@ export class LivingPortraitComponent implements OnInit {
     pointLight.position.z = 2;
     scene.add(pointLight);
 
-    const box = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.5, 1.5), material);
-
-    const torus = new THREE.Mesh(
-      new THREE.TorusGeometry(5, 1.5, 16, 100),
-      material
-    );
-
-    scene.add(torus, box);
-
     const canvasSizes = {
       width: 500,
       height: 300,
     };
 
     const camera = new THREE.PerspectiveCamera(
-      75,
+      50,
       canvasSizes.width / canvasSizes.height,
-      0.001,
-      1000
+      1,
+      100
     );
-    camera.position.z = 30;
+    camera.position.set( 0, 2, 3 );
+    camera.lookAt( 0, 1, 0 );
     scene.add(camera);
-
-    if (!canvas) {
-      return;
-    }
 
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas,
@@ -77,28 +82,7 @@ export class LivingPortraitComponent implements OnInit {
       renderer.render(scene, camera);
     });*/
 
-    const clock = new THREE.Clock();
-
-    const animateGeometry = () => {
-      const elapsedTime = clock.getElapsedTime();
-
-      // Update animaiton objects
-      box.rotation.x = elapsedTime;
-      box.rotation.y = elapsedTime;
-      box.rotation.z = elapsedTime;
-
-      torus.rotation.x = -elapsedTime;
-      torus.rotation.y = -elapsedTime;
-      torus.rotation.z = -elapsedTime;
-
-      // Render
-      renderer.render(scene, camera);
-
-      // Call tick again on the next frame
-      requestAnimationFrame(animateGeometry);
-    };
-
-    animateGeometry();
+    renderer.setAnimationLoop(() => renderer.render(scene, camera))
   }
 }
 
