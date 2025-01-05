@@ -43,8 +43,8 @@ export class LivingPortraitComponent implements OnInit {
     scene.add(torus, box);
 
     const canvasSizes = {
-      width: 500,
-      height: 300,
+      width: 320,
+      height: 540,
     };
 
     const camera = new THREE.PerspectiveCamera(

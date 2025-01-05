@@ -1,6 +1,6 @@
-<header class="container py-16 flex justify-between items-center">
-  <div class="text-5xl font-bold"><a href="/"></a>Lukachyna</div>
-  <nav>
+<header class="container py-6 lg:py-16 flex justify-between items-center">
+  <div class="text-3xl lg:text-5xl font-bold"><a href="/"></a>Lukachyna</div>
+  <nav class="hidden lg:block">
     <ul class="inline-flex [&>li:not(:last-child)]:mr-12">
       <li class="text-xl font-bold"><a routerLink="/">Home</a></li>
       <li class="text-xl font-bold"><a routerLink="/projects">Projects</a></li>
@@ -10,7 +10,7 @@
     </ul>
   </nav>
   <div class="flex items-center">
-    <ly-search-bar class="mr-4"/>
+    <ly-search-bar class="mr-4 hidden lg:block"/>
     <ly-appearance-selector class="mr-4"/>
     <button><a routerLink="/cms">CMS</a></button>
   </div>
