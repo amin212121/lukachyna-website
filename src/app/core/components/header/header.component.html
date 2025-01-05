@@ -1,19 +1,17 @@
-<header class="container py-16 flex justify-between">
+<header class="container py-16 flex justify-between items-center">
   <div class="text-5xl font-bold"><a href="/"></a>Lukachyna</div>
   <nav>
-    <ul class="inline-flex">
-      <li class="text-xl bold">Home</li>
-      <li class="text-xl bold">Projects</li>
-      <li class="text-xl bold">Blog</li>
-      <li class="text-xl bold">Publications</li>
-      <li class="text-xl bold">Contact</li>
+    <ul class="inline-flex [&>li:not(:last-child)]:mr-12">
+      <li class="text-xl font-bold"><a routerLink="/">Home</a></li>
+      <li class="text-xl font-bold"><a routerLink="/projects">Projects</a></li>
+      <li class="text-xl font-bold"><a routerLink="/blog">Blog</a></li>
+      <li class="text-xl font-bold"><a routerLink="/publications">Publications</a></li>
+      <li class="text-xl font-bold"><a routerLink="/contact">Contact</a></li>
     </ul>
   </nav>
-  <div>
-    <div>
-      <input />
-      <button>Search</button>
-    </div>
-    D/L
+  <div class="flex items-center">
+    <ly-search-bar class="mr-4"/>
+    <ly-appearance-selector class="mr-4"/>
+    <button><a routerLink="/cms">CMS</a></button>
   </div>
 </header>
