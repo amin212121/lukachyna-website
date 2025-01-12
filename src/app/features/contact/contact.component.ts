@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   templateUrl: './contact.component.html',
-  standalone: true
+  standalone: true,
 })
-
 export class ContactComponent {}

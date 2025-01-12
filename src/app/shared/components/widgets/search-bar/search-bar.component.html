@@ -1,4 +1,11 @@
-<div>
-  <ly-input/>
-  <button>Search</button>
+<div class="relative min-w-[200px] max-w-sm">
+  <button class="absolute left-2.5 top-1/2 mr-2.5 size-6 -translate-y-1/2 border-r border-slate-200">
+    <img ngSrc="/icons/mic.svg" alt="" fill />
+  </button>
+  <input
+    class="ease w-full rounded-md border border-slate-200 bg-transparent py-2 pl-12 pr-28 text-sm text-slate-700 shadow-sm transition duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-400 focus:shadow focus:outline-none"
+    placeholder="Search" />
+  <button class="absolute right-3 top-1/2 size-6 -translate-y-1/2">
+    <img ngSrc="/icons/magnifying-glass.svg" alt="" fill />
+  </button>
 </div>

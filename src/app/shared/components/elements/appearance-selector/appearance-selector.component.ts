@@ -1,12 +1,10 @@
-import {Component} from '@angular/core';
-import {NgOptimizedImage} from '@angular/common';
+import { Component } from '@angular/core'
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'ly-appearance-selector',
   templateUrl: './appearance-selector.component.html',
   imports: [NgOptimizedImage],
-  standalone: true
+  standalone: true,
 })
-
-export class AppearanceSelectorComponent {
-}
+export class AppearanceSelectorComponent {}

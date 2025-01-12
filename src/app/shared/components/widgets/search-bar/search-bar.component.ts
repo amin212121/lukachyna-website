@@ -1,13 +1,10 @@
-import { Component } from '@angular/core';
-import {InputComponent} from '../../elements/input/input.component';
+import { Component } from '@angular/core'
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'ly-search-bar',
   templateUrl: './search-bar.component.html',
-  imports: [
-    InputComponent
-  ],
-  standalone: true
+  imports: [NgOptimizedImage],
+  standalone: true,
 })
-
 export class SearchBarComponent {}

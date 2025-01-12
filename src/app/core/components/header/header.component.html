@@ -1,7 +1,21 @@
-<header class="container py-6 lg:py-16 flex justify-between items-center">
-  <div class="text-3xl lg:text-5xl font-bold"><a href="/"></a>Lukachyna</div>
-  <nav class="hidden lg:block">
-    <ul class="inline-flex [&>li:not(:last-child)]:mr-12">
+<header class="container flex items-center justify-between py-6 lg:py-16">
+  <button class="flex flex-col items-center justify-center lg:hidden" (click)="mobileMenuClickHandler()">
+    <span
+      class="bg-gray-900 transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm {{
+        isMobileMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'
+      }}"></span>
+    <span
+      class="bg-gray-900 transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 {{
+        isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+      }}"></span>
+    <span
+      class="bg-gray-900 transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm {{
+        isMobileMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-0.5'
+      }}"></span>
+  </button>
+  <div class="mr-6 text-3xl font-bold lg:text-5xl"><a href="/"></a>Lukachyna</div>
+  <nav class="mr-6 {{isMobileMenuOpen ? '' : 'hidden' }} lg:block">
+    <ul class="inline-flex flex-col lg:flex-row [&>li:not(:last-child)]:mr-12">
       <li class="text-xl font-bold"><a routerLink="/">Home</a></li>
       <li class="text-xl font-bold"><a routerLink="/projects">Projects</a></li>
       <li class="text-xl font-bold"><a routerLink="/blog">Blog</a></li>
@@ -10,8 +24,9 @@
     </ul>
   </nav>
   <div class="flex items-center">
-    <ly-search-bar class="mr-4 hidden lg:block"/>
-    <ly-appearance-selector class="mr-4"/>
+    <ly-search-bar class="mr-4 hidden lg:block" />
+    <ly-appearance-selector class="mr-4" />
+    <ly-language-selector class="mr-4" />
     <button><a routerLink="/cms">CMS</a></button>
   </div>
 </header>
