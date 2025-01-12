@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core'
 
 @Component({
   selector: 'ly-input',
   templateUrl: './input.component.html',
-  standalone: true
+  standalone: true,
 })
-
-export class InputComponent {}
+export class InputComponent {
+  placeholder = input<string>()
+}
