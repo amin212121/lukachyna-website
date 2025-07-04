@@ -32,4 +32,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "dist/lukachyna-website/**"
           target: "/var/www/lukachyna.com"
+          overwrite: 1
           strip_components: 1
