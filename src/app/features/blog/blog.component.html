@@ -1,11 +1,121 @@
-<section class="container">
-  <h1 class="text-center font-bold">A lot of posts</h1>
-  <article>
-    <h2 class="font-bold">How to correct connect GA4 for Next.js</h2>
-    <p>GA4 has problem with referer tracking in SPA projects after researches I found solution...</p>
-  </article>
-  <article>
-    <h2 class="font-bold">Best programming books</h2>
-    <p>Clean code,...</p>
-  </article>
+<!-- ─── PAGE HEADER ─────────────────────────────────────── -->
+<section class="blog-header">
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="container blog-header__inner">
+    <div class="blog-header__eyebrow">
+      <span class="section-num">03</span>
+      <span class="eyebrow-sep" aria-hidden="true">·</span>
+      <span class="section-label">{{ 'blog.eyebrow' | translate }}</span>
+    </div>
+
+    <h1 class="blog-header__title">
+      <span class="title-line title-line--solid">THOUGHTS /</span>
+      <span class="title-line title-line--outline">WRITINGS</span>
+    </h1>
+
+    <div class="blog-header__meta">
+      <div class="post-count-badge">
+        <span class="count-num">{{ posts.length }}</span>
+        <span class="count-label">{{ 'blog.articlesPublished' | translate }}</span>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- ─── FILTER BAR ──────────────────────────────────────── -->
+<div class="filter-bar">
+  <div class="container filter-bar__inner">
+    @for (cat of categories; track cat) {
+      <button
+        class="filter-chip"
+        [class.filter-chip--active]="activeCategory === cat"
+        (click)="setCategory(cat)"
+      >
+        {{ cat === 'All' ? ('common.all' | translate) : cat }}
+      </button>
+    }
+  </div>
+</div>
+
+<!-- ─── FEATURED POST ───────────────────────────────────── -->
+@if (showFeatured) {
+  <div class="featured-wrapper">
+    <div class="container">
+      <article class="featured-post">
+        <div class="featured-post__accent-bar" aria-hidden="true"></div>
+
+        <div class="featured-post__body">
+          <div class="featured-post__header">
+            <div class="post-meta">
+              <span class="post-category post-category--{{ featuredPost.category.toLowerCase() }}">
+                {{ featuredPost.category }}
+              </span>
+              <span class="meta-sep" aria-hidden="true">·</span>
+              <span class="post-read-time">{{ featuredPost.readTime }} {{ 'blog.minRead' | translate }}</span>
+              <span class="meta-sep" aria-hidden="true">·</span>
+              <span class="post-date">{{ featuredPost.date }}</span>
+            </div>
+            <span class="featured-badge">{{ 'blog.featured' | translate }}</span>
+          </div>
+
+          <h2 class="featured-post__title">{{ featuredPost.title }}</h2>
+          <p class="featured-post__excerpt">{{ featuredPost.excerpt }}</p>
+
+          <div class="featured-post__footer">
+            <div class="tag-list">
+              @for (tag of featuredPost.tags; track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
+            <a [routerLink]="['/blog', featuredPost.slug]" class="read-link">
+              {{ 'blog.readArticle' | translate }}
+              <span class="read-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="featured-post__decor-num" aria-hidden="true">01</div>
+      </article>
+    </div>
+  </div>
+}
+
+<!-- ─── POSTS GRID ──────────────────────────────────────── -->
+<div class="posts-section container">
+  @if (gridPosts.length === 0) {
+    <div class="empty-state">
+      <span class="empty-state__dash" aria-hidden="true">—</span>
+      <p class="empty-state__text">{{ 'blog.emptyState' | translate }}</p>
+    </div>
+  } @else {
+    <div class="posts-grid">
+      @for (post of gridPosts; track post.slug; let i = $index) {
+        <article class="post-card">
+          <div class="post-card__num" aria-hidden="true">{{ getCardNumber(i) }}</div>
+
+          <div class="post-card__body">
+            <div class="post-meta">
+              <span class="post-category post-category--{{ post.category.toLowerCase() }}">
+                {{ post.category }}
+              </span>
+              <span class="meta-sep" aria-hidden="true">·</span>
+              <span class="post-read-time">{{ post.readTime }} {{ 'blog.min' | translate }}</span>
+            </div>
+
+            <h3 class="post-card__title">{{ post.title }}</h3>
+            <p class="post-card__excerpt">{{ post.excerpt }}</p>
+
+            <div class="post-card__footer">
+              <span class="post-date">{{ post.date }}</span>
+              <a [routerLink]="['/blog', post.slug]" class="read-link read-link--sm">
+                {{ 'blog.read' | translate }}
+                <span class="read-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</div>

@@ -1,1 +1,206 @@
-<section class="container flex items-center justify-between py-16">A lot of projects</section>
+<!-- ─── PAGE HERO ───────────────────────────────────────────── -->
+<section class="page-hero">
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="container page-hero__inner">
+    <div class="eyebrow">
+      <span class="eyebrow__num">03</span>
+      <span class="eyebrow__sep" aria-hidden="true">·</span>
+      <span class="eyebrow__label">{{ 'nav.projects' | translate }}</span>
+    </div>
+
+    <h1 class="page-hero__title">
+      <span class="title-line title-line--solid">WORK</span>
+      <span class="title-line title-line--outline">&amp; BUILDS</span>
+    </h1>
+
+    <p class="page-hero__sub">{{ 'projects.sub' | translate }}</p>
+
+    <div class="page-hero__stats">
+      <div class="stat">
+        <span class="stat__num">{{ projects.length }}</span>
+        <span class="stat__label">{{ 'projects.statsProjects' | translate }}</span>
+      </div>
+      <div class="stat-sep" aria-hidden="true"></div>
+      <div class="stat">
+        <span class="stat__num">3</span>
+        <span class="stat__label">{{ 'projects.statsOpenSource' | translate }}</span>
+      </div>
+      <div class="stat-sep" aria-hidden="true"></div>
+      <div class="stat">
+        <span class="stat__num">7+</span>
+        <span class="stat__label">{{ 'projects.statsYears' | translate }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURED PROJECT ────────────────────────────────────── -->
+<section class="featured container">
+  <div class="section-eyebrow">
+    <span class="section-num" aria-hidden="true">Featured</span>
+    <span class="section-label">{{ 'projects.caseStudy' | translate }}</span>
+  </div>
+
+  <div class="featured-card">
+    <!-- Left: visual placeholder -->
+    <div class="featured-card__media">
+      <div class="featured-card__glow" aria-hidden="true"></div>
+      <span class="featured-card__ghost-num" aria-hidden="true">
+        {{ padId(featuredProject.id) }}
+      </span>
+      <div class="featured-card__badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        Featured · {{ featuredProject.year }}
+      </div>
+    </div>
+
+    <!-- Right: content -->
+    <div class="featured-card__content">
+      <div class="featured-card__meta">
+        <span class="project-num">{{ padId(featuredProject.id) }}</span>
+        <span class="category-tag">{{ featuredProject.category }}</span>
+      </div>
+
+      <p class="featured-card__subtitle">{{ featuredProject.subtitle }}</p>
+      <h2 class="featured-card__title">{{ featuredProject.title }}</h2>
+      <p class="featured-card__desc">{{ featuredProject.description }}</p>
+
+      <div class="tech-tags">
+        @for (tag of featuredProject.tech; track tag) {
+          <span class="tech-tag">{{ tag }}</span>
+        }
+      </div>
+
+      <div class="featured-card__actions">
+        @if (featuredProject.live) {
+          <a
+            [href]="featuredProject.live"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >{{ 'projects.liveSite' | translate }}</a>
+        }
+        @if (featuredProject.github) {
+          <a
+            [href]="featuredProject.github"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-ghost"
+          >GitHub</a>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FILTER + PROJECT GRID ───────────────────────────────── -->
+<section class="grid-section container">
+  <div class="section-eyebrow">
+    <span class="section-num" aria-hidden="true">{{ 'projects.allWork' | translate }}</span>
+    <span class="section-label">{{ 'projects.browseByType' | translate }}</span>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="filter-bar" role="tablist" aria-label="Filter projects by category">
+    @for (f of filters; track f.value) {
+      <button
+        role="tab"
+        class="filter-btn"
+        [class.filter-btn--active]="activeFilter() === f.value"
+        [attr.aria-selected]="activeFilter() === f.value"
+        (click)="setFilter(f.value)"
+      >{{ f.value === 'all' ? ('common.all' | translate) : f.label }}</button>
+    }
+  </div>
+
+  <!-- Project grid -->
+  <div class="projects-grid">
+    @for (project of gridProjects(); track project.id) {
+      <article class="project-card">
+        <!-- Subtle per-project accent -->
+        <div
+          class="project-card__accent"
+          aria-hidden="true"
+          [style.background]="'radial-gradient(ellipse at top right, ' + project.accentColor + '10 0%, transparent 65%)'"
+        ></div>
+
+        <div class="project-card__top">
+          <span class="project-num">{{ padId(project.id) }}</span>
+          <span class="project-year">{{ project.year }}</span>
+        </div>
+
+        <p class="project-card__subtitle">{{ project.subtitle }}</p>
+        <h3 class="project-card__title">{{ project.title }}</h3>
+        <p class="project-card__desc">{{ project.description }}</p>
+
+        <div class="tech-tags">
+          @for (tag of project.tech; track tag) {
+            <span class="tech-tag">{{ tag }}</span>
+          }
+        </div>
+
+        <div class="project-card__links">
+          @if (project.live) {
+            <a
+              [href]="project.live"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card-link card-link--live"
+            >{{ 'projects.live' | translate }}</a>
+          }
+          @if (project.github) {
+            <a
+              [href]="project.github"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card-link card-link--gh"
+            >GitHub</a>
+          }
+        </div>
+      </article>
+    }
+  </div>
+
+  @if (gridProjects().length === 0) {
+    <div class="empty-state">
+      <span class="empty-state__dash" aria-hidden="true">—</span>
+      <p class="empty-state__text">{{ 'projects.emptyState' | translate }}</p>
+    </div>
+  }
+</section>
+
+<!-- ─── CTA ─────────────────────────────────────────────────── -->
+<section class="cta">
+  <div class="container">
+    <div class="cta__inner">
+      <div class="cta__text">
+        <p class="cta__eyebrow">{{ 'projects.ctaEyebrow' | translate }}</p>
+        <h2 class="cta__headline">
+          {{ 'projects.ctaHeadline' | translate }}<br />
+          <span class="cta__headline--accent">{{ 'projects.ctaHeadlineAccent' | translate }}</span>
+        </h2>
+        <p class="cta__sub">{{ 'projects.ctaSub' | translate }}</p>
+      </div>
+
+      <div class="cta__actions">
+        <a routerLink="/contact" class="btn-large">{{ 'projects.ctaStartConversation' | translate }}</a>
+        <div class="cta__social">
+          <a
+            href="https://www.linkedin.com/in/stepan-lukachyna-837b651b7/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >LinkedIn</a>
+          <span class="social-sep" aria-hidden="true">·</span>
+          <a
+            href="https://github.com/amin212121"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

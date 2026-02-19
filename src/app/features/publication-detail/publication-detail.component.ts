@@ -1,9 +1,8 @@
-import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core'
+import { Component, AfterViewInit, OnInit, Inject, PLATFORM_ID } from '@angular/core'
 import { isPlatformBrowser } from '@angular/common'
-import { RouterLink } from '@angular/router'
+import { ActivatedRoute, RouterLink } from '@angular/router'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { TranslatePipe } from '../../shared/pipes/translate.pipe'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -21,13 +20,43 @@ interface Publication {
 }
 
 @Component({
-  selector: 'ly-publications-page',
-  templateUrl: './publications.component.html',
-  styleUrl: './publications.component.scss',
+  selector: 'ly-publication-detail',
+  templateUrl: './publication-detail.component.html',
+  styleUrl: './publication-detail.component.scss',
   standalone: true,
-  imports: [RouterLink, TranslatePipe],
+  imports: [RouterLink],
 })
-export class PublicationsComponent implements AfterViewInit {
+export class PublicationDetailComponent implements OnInit, AfterViewInit {
+  publication: Publication | null = null
+  notFound = false
+  bibtexCopied = false
+
+  get relatedPubs(): Publication[] {
+    return this.publications.filter(p => p.id !== this.publication?.id)
+  }
+
+  get bibtexString(): string {
+    if (!this.publication) return ''
+    const p = this.publication
+    const key = `lukachyna${p.year}${p.title.split(' ').slice(0, 2).join('').toLowerCase().replace(/[^a-z]/g, '')}`
+
+    if (p.type === 'journal') {
+      return `@article{${key},
+  author  = {${p.authors}},
+  title   = {{${p.title}}},
+  journal = {${p.venue}},
+  year    = {${p.year}}
+}`
+    } else {
+      return `@inproceedings{${key},
+  author    = {${p.authors}},
+  title     = {{${p.title}}},
+  booktitle = {${p.venue}},
+  year      = {${p.year}}
+}`
+    }
+  }
+
   readonly publications: Publication[] = [
     {
       id: 1,
@@ -81,31 +110,29 @@ export class PublicationsComponent implements AfterViewInit {
     },
   ]
 
-  readonly filters = ['All', 'Journal', 'Conference']
-  activeFilter = 'All'
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
+    private route: ActivatedRoute,
+  ) {}
 
-  get filteredPublications(): Publication[] {
-    if (this.activeFilter === 'All') return this.publications
-    return this.publications.filter(p => p.type === this.activeFilter.toLowerCase())
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('id'))
+      const found = this.publications.find(p => p.id === id)
+      this.publication = found ?? null
+      this.notFound = !found
+    })
   }
 
-  get journalCount(): number {
-    return this.publications.filter(p => p.type === 'journal').length
+  copyBibtex(): void {
+    if (!isPlatformBrowser(this.platformId)) return
+    navigator.clipboard.writeText(this.bibtexString).then(() => {
+      this.bibtexCopied = true
+      setTimeout(() => {
+        this.bibtexCopied = false
+      }, 2000)
+    })
   }
-
-  get conferenceCount(): number {
-    return this.publications.filter(p => p.type === 'conference').length
-  }
-
-  setFilter(f: string): void {
-    this.activeFilter = f
-  }
-
-  formatIndex(i: number): string {
-    return (i + 1).toString().padStart(2, '0')
-  }
-
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return
@@ -115,21 +142,32 @@ export class PublicationsComponent implements AfterViewInit {
   private initAnimations(): void {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.1 })
 
-    tl.from('.pub-header__eyebrow', { opacity: 0, y: -12, duration: 0.5 })
-      .from(
-        '.title-line',
-        { opacity: 0, y: 80, stagger: 0.15, duration: 0.9, ease: 'power4.out' },
-        '-=0.25',
-      )
-      .from('.pub-stats', { opacity: 0, y: 14, duration: 0.4 }, '-=0.35')
-      .from('.filter-chip', { opacity: 0, y: 10, stagger: 0.07, duration: 0.4 }, '-=0.2')
+    tl.from('.back-link', { opacity: 0, x: -16, duration: 0.45 })
+      .from('.pub-hero__eyebrow', { opacity: 0, y: -10, duration: 0.4 }, '-=0.2')
+      .from('.pub-title', { opacity: 0, y: 60, duration: 0.9, ease: 'power4.out' }, '-=0.3')
+      .from('.pub-hero__footer', { opacity: 0, y: 14, duration: 0.4 }, '-=0.35')
 
-    gsap.from('.pub-entry', {
-      scrollTrigger: { trigger: '.pub-list', start: 'top 80%' },
+    gsap.from('.pub-section', {
+      scrollTrigger: { trigger: '.pub-body', start: 'top 80%' },
       opacity: 0,
-      y: 40,
-      stagger: 0.14,
-      duration: 0.75,
+      y: 30,
+      stagger: 0.15,
+      duration: 0.65,
+    })
+
+    gsap.from('.pub-cta', {
+      scrollTrigger: { trigger: '.pub-cta', start: 'top 88%' },
+      opacity: 0,
+      y: 20,
+      duration: 0.55,
+    })
+
+    gsap.from('.related-entry', {
+      scrollTrigger: { trigger: '.related-list', start: 'top 85%' },
+      opacity: 0,
+      y: 25,
+      stagger: 0.12,
+      duration: 0.6,
     })
   }
 }

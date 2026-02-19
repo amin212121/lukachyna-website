@@ -1,32 +1,76 @@
-<header class="container flex items-center justify-between py-6 lg:py-16">
-  <button class="flex flex-col items-center justify-center lg:hidden" (click)="mobileMenuClickHandler()">
+<header class="container flex items-center justify-between py-6 lg:py-10">
+  <button
+    class="flex flex-col items-center justify-center lg:hidden"
+    (click)="mobileMenuClickHandler()"
+    aria-label="Toggle menu"
+  >
     <span
-      class="bg-gray-900 transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm {{
+      class="bg-[var(--text)] transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm {{
         isMobileMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'
-      }}"></span>
+      }}"
+    ></span>
     <span
-      class="bg-gray-900 transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 {{
+      class="bg-[var(--text)] transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 {{
         isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
-      }}"></span>
+      }}"
+    ></span>
     <span
-      class="bg-gray-900 transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm {{
+      class="bg-[var(--text)] transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm {{
         isMobileMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-0.5'
-      }}"></span>
+      }}"
+    ></span>
   </button>
-  <div class="mr-6 text-3xl font-bold lg:text-5xl"><a href="/"></a>Lukachyna</div>
-  <nav class="mr-6 {{isMobileMenuOpen ? '' : 'hidden' }} lg:block">
-    <ul class="inline-flex flex-col lg:flex-row [&>li:not(:last-child)]:mr-12">
-      <li class="text-xl font-bold"><a routerLink="/">Home</a></li>
-      <li class="text-xl font-bold"><a routerLink="/projects">Projects</a></li>
-      <li class="text-xl font-bold"><a routerLink="/blog">Blog</a></li>
-      <li class="text-xl font-bold"><a routerLink="/publications">Publications</a></li>
-      <li class="text-xl font-bold"><a routerLink="/contact">Contact</a></li>
+
+  <div class="mr-6">
+    <a
+      routerLink="/"
+      class="text-2xl font-bold tracking-tight text-[var(--text)] hover:text-[#4facfe] transition-colors duration-200"
+      style="font-family: 'Big Shoulders Display', sans-serif; letter-spacing: -0.01em;"
+    >Lukachyna</a>
+  </div>
+
+  <nav class="mr-6 {{ isMobileMenuOpen ? '' : 'hidden' }} lg:block">
+    <ul class="inline-flex flex-col lg:flex-row [&>li:not(:last-child)]:mr-10">
+      <li>
+        <a
+          routerLink="/"
+          class="text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200 tracking-widest uppercase"
+          style="font-family: 'DM Mono', monospace;"
+        >{{ 'nav.home' | translate }}</a>
+      </li>
+      <li>
+        <a
+          routerLink="/projects"
+          class="text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200 tracking-widest uppercase"
+          style="font-family: 'DM Mono', monospace;"
+        >{{ 'nav.projects' | translate }}</a>
+      </li>
+      <li>
+        <a
+          routerLink="/blog"
+          class="text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200 tracking-widest uppercase"
+          style="font-family: 'DM Mono', monospace;"
+        >{{ 'nav.blog' | translate }}</a>
+      </li>
+      <li>
+        <a
+          routerLink="/publications"
+          class="text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200 tracking-widest uppercase"
+          style="font-family: 'DM Mono', monospace;"
+        >{{ 'nav.publications' | translate }}</a>
+      </li>
+      <li>
+        <a
+          routerLink="/contact"
+          class="text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200 tracking-widest uppercase"
+          style="font-family: 'DM Mono', monospace;"
+        >{{ 'nav.contact' | translate }}</a>
+      </li>
     </ul>
   </nav>
-  <div class="flex items-center">
-    <ly-search-bar class="mr-4 hidden lg:block" />
-    <ly-appearance-selector class="mr-4" />
-    <ly-language-selector class="mr-4" />
-    <button><a routerLink="/cms">CMS</a></button>
+
+  <div class="flex items-center gap-3">
+    <ly-appearance-selector />
+    <ly-language-selector />
   </div>
 </header>
