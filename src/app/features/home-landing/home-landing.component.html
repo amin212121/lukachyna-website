@@ -1,16 +1,184 @@
-<section class="container">
-  <div class="flex flex-col lg:flex-row">
-    <ly-living-portrait />
-    <div>
-      <h1 class="text-3xl font-bold">Hey there :) I'm Stepan and I develop software and other things</h1>
-      <p>
-        I develop things for mobile, web, and I love to teach people about programming features, software architecture
-        and quality.
+<!-- ─── HERO ─────────────────────────────────────────── -->
+<section class="hero">
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="container hero__inner">
+    <!-- Left: Content -->
+    <div class="hero__content">
+      <div class="hero__eyebrow">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="status-text">{{ 'home.heroStatus' | translate }}</span>
+      </div>
+
+      <div class="hero__name-wrap">
+        <h1 class="hero__name">
+          <span class="name-line name-line--solid">STEPAN</span>
+          <span class="name-line name-line--outline">LUKACHYNA</span>
+        </h1>
+      </div>
+
+      <div class="hero__role">
+        <span class="role-tag">{{ 'home.heroRoleEngineer' | translate }}</span>
+        <span class="role-sep" aria-hidden="true">/</span>
+        <span class="role-tag">{{ 'home.heroRoleReact' | translate }}</span>
+        <span class="role-sep" aria-hidden="true">/</span>
+        <span class="role-tag">{{ 'home.heroRoleEducator' | translate }}</span>
+      </div>
+
+      <p class="hero__bio">
+        {{ 'home.heroBioPre' | translate }}<strong>twnty Digital</strong>{{ 'home.heroBioPost' | translate }}
       </p>
-      <ul>
-        <li>Working at <a href="https://twnty.de/">twnty Digital</a></li>
-        <li>Interesting e-Commerce</li>
-      </ul>
+
+      <div class="hero__cta">
+        <a routerLink="/projects" class="btn-primary">{{ 'home.heroCtaWork' | translate }}</a>
+        <a routerLink="/contact" class="btn-ghost">{{ 'home.heroCtaTalk' | translate }}</a>
+      </div>
+
+      <div class="hero__metrics">
+        <div class="metric">
+          <span class="metric__number">7+</span>
+          <span class="metric__label">{{ 'home.heroYears' | translate }}</span>
+        </div>
+        <div class="metric">
+          <span class="metric__number">15+</span>
+          <span class="metric__label">{{ 'home.heroProjects' | translate }}</span>
+        </div>
+        <div class="metric">
+          <span class="metric__number">30+</span>
+          <span class="metric__label">{{ 'home.heroStudents' | translate }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: 3D Portrait -->
+    <div class="hero__visual">
+      <div class="portrait-frame">
+        <div class="portrait-glow" aria-hidden="true"></div>
+        <ly-living-portrait />
+        <div class="portrait-label" aria-hidden="true">
+          <span class="portrait-label__dot"></span>
+          3D Interactive
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span class="scroll-hint__label">scroll</span>
+    <div class="scroll-hint__rail">
+      <span class="scroll-hint__beacon"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TECH TICKER ───────────────────────────────────── -->
+<div class="tech-ticker" aria-hidden="true">
+  <div class="tech-ticker__track">
+    @for (item of marqueeItems; track $index) {
+      <span class="tech-ticker__item">{{ item }}</span>
+    }
+  </div>
+</div>
+
+<!-- ─── EXPERTISE ─────────────────────────────────────── -->
+<section class="expertise container">
+  <div class="section-eyebrow">
+    <span class="section-num" aria-hidden="true">01</span>
+    <span class="section-label">{{ 'home.expertiseLabel' | translate }}</span>
+  </div>
+
+  <div class="expertise__grid">
+    <div class="expertise-card">
+      <div class="expertise-card__num" aria-hidden="true">01</div>
+      <h3 class="expertise-card__title">{{ 'home.expertise1Title' | translate }}</h3>
+      <p class="expertise-card__body">{{ 'home.expertise1Body' | translate }}</p>
+    </div>
+
+    <div class="expertise-card">
+      <div class="expertise-card__num" aria-hidden="true">02</div>
+      <h3 class="expertise-card__title">{{ 'home.expertise2Title' | translate }}</h3>
+      <p class="expertise-card__body">{{ 'home.expertise2Body' | translate }}</p>
+    </div>
+
+    <div class="expertise-card">
+      <div class="expertise-card__num" aria-hidden="true">03</div>
+      <h3 class="expertise-card__title">{{ 'home.expertise3Title' | translate }}</h3>
+      <p class="expertise-card__body">{{ 'home.expertise3Body' | translate }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PHILOSOPHY STATEMENT ─────────────────────────── -->
+<section class="statement">
+  <div class="container">
+    <div class="section-eyebrow">
+      <span class="section-num" aria-hidden="true">*</span>
+      <span class="section-label">{{ 'home.philosophyLabel' | translate }}</span>
+    </div>
+    <div class="statement__grid">
+      <div class="statement__item">
+        <span class="statement__keyword">{{ 'home.statementLine1' | translate }}</span>
+        <p class="statement__body">{{ 'home.statementLine1b' | translate }}</p>
+      </div>
+      <div class="statement__item statement__item--mid">
+        <span class="statement__keyword">{{ 'home.statementLine2' | translate }}</span>
+        <p class="statement__body">{{ 'home.statementLine2b' | translate }}<br />{{ 'home.statementLine3' | translate }}</p>
+      </div>
+      <div class="statement__item statement__item--right">
+        <span class="statement__keyword">{{ 'home.statementLine4' | translate }}</span>
+        <p class="statement__body">{{ 'home.statementLine4b' | translate }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TECH STACK ────────────────────────────────────── -->
+<section class="skills-section container">
+  <div class="section-eyebrow">
+    <span class="section-num" aria-hidden="true">02</span>
+    <span class="section-label">{{ 'home.techStackLabel' | translate }}</span>
+  </div>
+
+  <div class="skills-grid">
+    @for (skill of skills; track skill.name) {
+      <div class="skill-chip">
+        <span class="skill-chip__name">{{ skill.name }}</span>
+        <span class="skill-chip__level skill-chip__level--{{ skill.level.toLowerCase() }}">{{ skill.level }}</span>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ─── CONNECT / CTA ─────────────────────────────────── -->
+<section class="connect">
+  <div class="container">
+    <div class="connect__inner">
+      <div class="connect__text">
+        <h2 class="connect__headline">
+          {{ 'home.connectHeadline' | translate }}<br />
+          <span class="connect__headline--accent">{{ 'home.connectHeadlineAccent' | translate }}</span>
+        </h2>
+        <p class="connect__sub">{{ 'home.connectSub' | translate }}</p>
+      </div>
+
+      <div class="connect__actions">
+        <a routerLink="/contact" class="btn-large">{{ 'home.connectCta' | translate }}</a>
+        <div class="connect__social">
+          <a
+            href="https://www.linkedin.com/in/stepan-lukachyna-837b651b7/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >LinkedIn</a>
+          <span class="social-sep" aria-hidden="true">·</span>
+          <a
+            href="https://github.com/amin212121"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >GitHub</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

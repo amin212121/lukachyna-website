@@ -1,12 +1,16 @@
-<footer class="container py-8">
-  <ul class="flex">
-    <li>Info</li>
-    <li>Contact</li>
+<footer class="ly-footer container">
+  <ul class="footer-nav">
+    <li><a routerLink="/">{{ 'footer.info' | translate }}</a></li>
+    <li><a routerLink="/contact">{{ 'footer.contact' | translate }}</a></li>
   </ul>
-  <ul class="flex mb-5">
-    <li>LinkedIn</li>
-    <li>Github</li>
+  <ul class="footer-social">
+    <li><a href="https://www.linkedin.com/in/stepan-lukachyna-837b651b7/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+    <li><a href="https://github.com/amin212121" target="_blank" rel="noopener noreferrer">Github</a></li>
   </ul>
-  <div>© 2025 Lukachyna Stepan</div>
-  <div><b>Success</b> - in the details. <b>Genius</b> — making complex ideas simple, not making simple ideas complex.</div>
+  <div class="footer-copy">{{ 'footer.copy' | translate }}</div>
+  <div class="footer-quote">
+    <b>{{ 'footer.quoteSuccess' | translate }}</b> {{ 'footer.quoteSuccessText' | translate }}
+    <b>{{ 'footer.quoteGenius' | translate }}</b> {{ 'footer.quoteGeniusText' | translate }}
+    <b>{{ 'footer.quoteGrowth' | translate }}</b> {{ 'footer.quoteGrowthText' | translate }}
+  </div>
 </footer>

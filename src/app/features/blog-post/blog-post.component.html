@@ -1,0 +1,184 @@
+<!-- ─── READING PROGRESS ──────────────────────────────────── -->
+<div class="reading-progress" [style.width.%]="readProgress" aria-hidden="true"></div>
+
+@if (post) {
+
+  <!-- ─── BACK NAVIGATION ─────────────────────────────────── -->
+  <nav class="back-nav">
+    <div class="container">
+      <a [routerLink]="['/blog']" class="back-link">
+        <span class="back-arrow" aria-hidden="true">←</span>
+        {{ 'blogPost.back' | translate }}
+      </a>
+    </div>
+  </nav>
+
+  <!-- ─── ARTICLE HERO ────────────────────────────────────── -->
+  <header class="article-hero">
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <div class="container article-hero__inner">
+      <div class="article-meta">
+        <span class="post-category post-category--{{ post.category.toLowerCase() }}">
+          {{ post.category }}
+        </span>
+        <span class="meta-sep" aria-hidden="true">·</span>
+        <span class="meta-text">{{ post.readTime }} {{ 'blogPost.minRead' | translate }}</span>
+        <span class="meta-sep" aria-hidden="true">·</span>
+        <span class="meta-text">{{ post.date }}</span>
+      </div>
+
+      <h1 class="article-title">{{ post.title }}</h1>
+
+      <div class="article-hero__footer">
+        <div class="article-author">
+          <span class="author-label">{{ 'blogPost.by' | translate }}</span>
+          <span class="author-name">Stepan Lukachyna</span>
+        </div>
+        <div class="tag-list">
+          @for (tag of post.tags; track tag) {
+            <span class="tag">{{ tag }}</span>
+          }
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── ARTICLE PROSE ───────────────────────────────────── -->
+  <div class="prose-wrapper">
+    <div class="container">
+      <div class="article-prose">
+
+        @for (section of post.sections; track $index) {
+          @switch (section.type) {
+
+            @case ('lead') {
+              <p class="article-lead">{{ section.text }}</p>
+            }
+
+            @case ('paragraph') {
+              <p class="article-p">{{ section.text }}</p>
+            }
+
+            @case ('h2') {
+              <h2 class="article-h2">{{ section.text }}</h2>
+            }
+
+            @case ('h3') {
+              <h3 class="article-h3">{{ section.text }}</h3>
+            }
+
+            @case ('code') {
+              <div class="code-block">
+                <div class="code-block__header">
+                  <span class="code-block__lang">{{ section.language }}</span>
+                  <span class="code-block__dots" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </span>
+                </div>
+                <pre class="code-block__pre"><code class="code-block__code">{{ section.text }}</code></pre>
+              </div>
+            }
+
+            @case ('quote') {
+              <blockquote class="article-quote">
+                <p>{{ section.text }}</p>
+              </blockquote>
+            }
+
+            @case ('callout') {
+              <div class="article-callout">
+                <span class="callout-mark" aria-hidden="true">→</span>
+                <p>{{ section.text }}</p>
+              </div>
+            }
+
+            @case ('list') {
+              <ul class="article-list">
+                @for (item of section.items; track $index) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            }
+
+          }
+        }
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ARTICLE FOOTER TAGS ─────────────────────────────── -->
+  <div class="article-footer">
+    <div class="container">
+      <div class="article-footer__inner">
+        <div class="tag-list">
+          @for (tag of post.tags; track tag) {
+            <span class="tag tag--lg">{{ tag }}</span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── AUTHOR BIO ───────────────────────────────────────── -->
+  <div class="author-section">
+    <div class="container">
+      <div class="author-bio">
+        <div class="author-bio__avatar" aria-hidden="true">SL</div>
+        <div class="author-bio__content">
+          <div class="author-bio__name">Stepan Lukachyna</div>
+          <p class="author-bio__text">{{ 'blogPost.authorBio' | translate }}</p>
+          <a [routerLink]="['/contact']" class="author-bio__link">
+            {{ 'blogPost.getInTouch' | translate }} <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── MORE FROM BLOG ──────────────────────────────────── -->
+  @if (otherPosts.length > 0) {
+    <div class="more-section">
+      <div class="container">
+        <div class="more-section__header">
+          <h2 class="more-section__title">{{ 'blogPost.moreFromBlog' | translate }}</h2>
+          <a [routerLink]="['/blog']" class="more-section__all">
+            {{ 'blogPost.allPosts' | translate }} <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="more-posts-grid">
+          @for (p of otherPosts; track p.slug) {
+            <a [routerLink]="['/blog', p.slug]" class="more-post-card">
+              <div class="more-post-card__top">
+                <span class="post-category post-category--{{ p.category.toLowerCase() }}">
+                  {{ p.category }}
+                </span>
+                <span class="more-post-card__time">{{ p.readTime }} {{ 'blogPost.min' | translate }}</span>
+              </div>
+              <h3 class="more-post-card__title">{{ p.title }}</h3>
+              <div class="more-post-card__footer">
+                <span class="more-post-card__date">{{ p.date }}</span>
+                <span class="more-post-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+} @else if (notFound) {
+
+  <!-- ─── 404 STATE ────────────────────────────────────────── -->
+  <div class="not-found container">
+    <div class="not-found__num" aria-hidden="true">404</div>
+    <p class="not-found__text">{{ 'blogPost.notFound' | translate }}</p>
+    <a [routerLink]="['/blog']" class="back-link">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      {{ 'blogPost.backToBlog' | translate }}
+    </a>
+  </div>
+
+}

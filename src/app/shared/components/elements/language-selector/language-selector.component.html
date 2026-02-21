@@ -1,1 +1,16 @@
-<button class="relative size-9">EN</button>
+<button
+  class="flex items-center gap-1.5 rounded-full border border-[var(--border)] px-2.5 py-1 transition-all duration-200 hover:border-[var(--muted)]/50 hover:bg-white/[0.03]"
+  style="font-family: 'DM Mono', monospace;"
+  (click)="toggle()"
+  [attr.aria-label]="'Switch to ' + (ts.language() === 'en' ? 'Ukrainian' : 'English')"
+>
+  <span
+    class="text-[10px] font-medium uppercase tracking-widest text-[var(--text)] transition-opacity duration-200"
+    [style.opacity]="ts.language() === 'en' ? 1 : 0.3"
+  >EN</span>
+  <span class="text-[8px] text-[var(--muted)]/50">·</span>
+  <span
+    class="text-[10px] font-medium uppercase tracking-widest text-[var(--text)] transition-opacity duration-200"
+    [style.opacity]="ts.language() === 'ua' ? 1 : 0.3"
+  >UA</span>
+</button>

@@ -1,0 +1,155 @@
+<!-- ─── BACK NAVIGATION ───────────────────────────────────── -->
+<nav class="back-nav">
+  <div class="container">
+    <a [routerLink]="['/publications']" class="back-link">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      Publications
+    </a>
+  </div>
+</nav>
+
+@if (publication) {
+
+  <!-- ─── PUBLICATION HERO ─────────────────────────────────── -->
+  <header class="pub-hero">
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <div class="container pub-hero__inner">
+      <div class="pub-hero__eyebrow">
+        <span class="pub-year">{{ publication.year }}</span>
+        <span class="eyebrow-sep" aria-hidden="true">·</span>
+        <span class="type-badge type-badge--{{ publication.type }}">
+          {{ publication.type === 'journal' ? 'Journal Article' : 'Conference Paper' }}
+        </span>
+      </div>
+
+      <h1 class="pub-title">{{ publication.title }}</h1>
+
+      <div class="pub-hero__footer">
+        <div class="pub-byline">
+          <span class="meta-label">Authors</span>
+          <span class="meta-value">{{ publication.authors }}</span>
+        </div>
+        <div class="pub-venue-info">
+          <span class="meta-label">Published in</span>
+          <span class="meta-value">{{ publication.venue }}</span>
+          <span class="meta-sub">{{ publication.venueShort }}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── BODY ────────────────────────────────────────────── -->
+  <div class="pub-body container">
+
+    <!-- Abstract -->
+    <section class="pub-section">
+      <h2 class="pub-section__label">Abstract</h2>
+      <div class="pub-section__content">
+        <p class="abstract-text">{{ publication.abstract }}</p>
+      </div>
+    </section>
+
+    <!-- Keywords -->
+    <section class="pub-section">
+      <h2 class="pub-section__label">Keywords</h2>
+      <div class="pub-section__content">
+        <div class="keyword-list">
+          @for (kw of publication.keywords; track kw) {
+            <span class="keyword">{{ kw }}</span>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Citation -->
+    <section class="pub-section">
+      <h2 class="pub-section__label">Cite This Work</h2>
+      <div class="pub-section__content">
+        <div class="bibtex-block">
+          <div class="bibtex-block__header">
+            <span class="bibtex-block__tag">BibTeX</span>
+            <button
+              class="bibtex-copy"
+              [class.bibtex-copy--copied]="bibtexCopied"
+              (click)="copyBibtex()"
+              type="button"
+            >
+              {{ bibtexCopied ? 'Copied ✓' : 'Copy' }}
+            </button>
+          </div>
+          <pre class="bibtex-block__pre"><code class="bibtex-block__code">{{ bibtexString }}</code></pre>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ─── CTA ─────────────────────────────────────────────── -->
+  <div class="pub-cta-wrapper">
+    <div class="container">
+      <div class="pub-cta">
+        @if (publication.url) {
+          <a
+            [href]="publication.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="pub-cta__btn"
+          >
+            Read Full Paper
+            <span class="pub-cta__arrow" aria-hidden="true">↗</span>
+          </a>
+        } @else {
+          <div class="pub-cta__soon">
+            <span class="pub-cta__soon-dot" aria-hidden="true">◎</span>
+            Preprint Coming Soon
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── RELATED PUBLICATIONS ────────────────────────────── -->
+  @if (relatedPubs.length > 0) {
+    <div class="related-section">
+      <div class="container">
+        <h2 class="related-section__title">Related Publications</h2>
+
+        <div class="related-list">
+          @for (pub of relatedPubs; track pub.id) {
+            <a [routerLink]="['/publications', pub.id]" class="related-entry">
+
+              <div class="related-entry__left">
+                <span class="related-entry__year">{{ pub.year }}</span>
+              </div>
+
+              <div class="related-entry__right">
+                <span class="type-badge type-badge--{{ pub.type }}">
+                  {{ pub.type === 'journal' ? 'Journal' : 'Conference' }}
+                </span>
+                <h3 class="related-entry__title">{{ pub.title }}</h3>
+                <span class="related-entry__venue">{{ pub.venueShort }}</span>
+              </div>
+
+              <span class="related-entry__arrow" aria-hidden="true">→</span>
+
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+} @else if (notFound) {
+
+  <!-- ─── 404 STATE ────────────────────────────────────────── -->
+  <div class="not-found container">
+    <div class="not-found__num" aria-hidden="true">404</div>
+    <p class="not-found__text">Publication not found.</p>
+    <a [routerLink]="['/publications']" class="back-link">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      Back to Publications
+    </a>
+  </div>
+
+}

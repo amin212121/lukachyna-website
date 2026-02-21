@@ -1,3 +1,13 @@
-<button class="relative size-9" aria-label="Appearance: Light theme" title="Appearance: Light theme">
-  <img ngSrc="/icons/sun.svg" alt="" fill />
+<button
+  class="relative size-9 opacity-60 transition-opacity duration-200 hover:opacity-100"
+  [class.invert]="appearance.theme() === 'dark'"
+  (click)="appearance.toggle()"
+  [attr.aria-label]="'Switch to ' + (appearance.theme() === 'dark' ? 'light' : 'dark') + ' theme'"
+  [title]="'Switch to ' + (appearance.theme() === 'dark' ? 'light' : 'dark') + ' theme'"
+>
+  @if (appearance.theme() === 'dark') {
+    <img ngSrc="/icons/sun.svg" alt="" fill />
+  } @else {
+    <img ngSrc="/icons/moon.svg" alt="" fill />
+  }
 </button>

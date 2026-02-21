@@ -1,0 +1,484 @@
+// =============================================
+// PUBLICATIONS — DARK ARCHITECT
+// Palette: dark navy · electric blue · ember
+// Fonts: Big Shoulders Display · Plus Jakarta Sans · DM Mono
+// =============================================
+
+:host {
+  display: block;
+  padding-bottom: 8rem;
+}
+
+// ─── GRID OVERLAY ─────────────────────────────
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// ─── SHARED ───────────────────────────────────
+
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+// ─── PAGE HEADER ──────────────────────────────
+
+.pub-header {
+  position: relative;
+  padding: 5rem 0 6rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.pub-header__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.pub-header__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.eyebrow-sep {
+  color: rgba(255, 255, 255, 0.15);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+}
+
+.pub-header__title {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: clamp(3.5rem, 10vw, 10rem);
+  font-weight: 900;
+  line-height: 0.87;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2.5rem;
+}
+
+.title-line {
+  display: block;
+
+  &--solid {
+    color: var(--text);
+  }
+
+  &--outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--accent);
+  }
+}
+
+// ─── STATS ROW ────────────────────────────────
+
+.pub-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.stat__num {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stat__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat-sep {
+  color: rgba(255, 255, 255, 0.12);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+}
+
+// ─── FILTER BAR ───────────────────────────────
+
+.filter-bar {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 88px;
+  z-index: 10;
+}
+
+.filter-bar__inner {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.filter-chip {
+  position: relative;
+  flex-shrink: 0;
+  padding: 0.9rem 1.375rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:first-child {
+    border-left: 1px solid var(--border);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover {
+    color: var(--text);
+  }
+
+  &--active {
+    color: var(--accent);
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+// ─── TYPE BADGE ───────────────────────────────
+
+.type-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 2px;
+  white-space: nowrap;
+
+  &--journal {
+    color: var(--accent);
+    border: 1px solid rgba(79, 172, 254, 0.3);
+    background: rgba(79, 172, 254, 0.06);
+  }
+
+  &--conference {
+    color: var(--ember);
+    border: 1px solid rgba(255, 92, 43, 0.3);
+    background: rgba(255, 92, 43, 0.06);
+  }
+}
+
+// ─── PUBLICATIONS LIST ────────────────────────
+
+.pub-section {
+  padding: 4rem 0;
+}
+
+.pub-list {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+// ─── SINGLE ENTRY ────────────────────────────
+
+.pub-entry {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--surface);
+
+    .pub-entry__index {
+      color: var(--accent);
+      opacity: 0.7;
+    }
+
+    .pub-entry__year {
+      color: var(--text);
+    }
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+// Left column — index + year
+
+.pub-entry__left {
+  flex-shrink: 0;
+  width: 9rem;
+  padding: 2.5rem 2rem 2.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  border-right: 1px solid var(--border);
+
+  @media (max-width: 767px) {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+.pub-entry__index {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.18);
+  transition: color 0.3s, opacity 0.3s;
+  line-height: 1;
+}
+
+.pub-entry__year {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--muted);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transition: color 0.3s;
+
+  @media (max-width: 767px) {
+    font-size: 1.5rem;
+  }
+}
+
+// Right column — full content
+
+.pub-entry__right {
+  flex: 1;
+  min-width: 0;
+  padding: 2.5rem;
+
+  @media (max-width: 767px) {
+    padding: 1.5rem;
+  }
+}
+
+.pub-entry__top {
+  margin-bottom: 1rem;
+}
+
+.pub-entry__title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.42;
+  margin-bottom: 0.6rem;
+  max-width: 760px;
+}
+
+.pub-entry__authors {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.pub-entry__venue {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.venue-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(228, 232, 240, 0.55);
+  font-style: italic;
+}
+
+.venue-sep {
+  color: rgba(255, 255, 255, 0.1);
+  font-family: 'DM Mono', monospace;
+}
+
+.venue-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.pub-entry__abstract {
+  font-size: 0.85rem;
+  line-height: 1.82;
+  color: rgba(228, 232, 240, 0.5);
+  max-width: 720px;
+  margin-bottom: 1.75rem;
+}
+
+// Footer: keywords + link
+
+.pub-entry__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.keyword-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.keyword {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+}
+
+// ─── READ LINK ────────────────────────────────
+
+.read-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+  transition: color 0.2s;
+
+  .read-arrow {
+    display: inline-block;
+    transition: transform 0.22s;
+  }
+
+  &:hover {
+    color: var(--text);
+
+    .read-arrow {
+      transform: translateX(5px);
+    }
+  }
+}
+
+.pub-entry__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-shrink: 0;
+}
+
+.read-link--detail {
+  color: var(--muted);
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.link-soon {
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.25rem 0.65rem;
+  border-radius: 2px;
+}
+
+// ─── EMPTY STATE ──────────────────────────────
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7rem 0;
+  gap: 1.25rem;
+}
+
+.empty-state__dash {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.05);
+  line-height: 1;
+}
+
+.empty-state__text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}

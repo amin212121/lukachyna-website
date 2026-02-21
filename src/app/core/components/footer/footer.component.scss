@@ -1,0 +1,147 @@
+:host {
+  display: block;
+}
+
+.ly-footer {
+  position: relative;
+  padding-top: 3.5rem;
+  padding-bottom: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      var(--ember) 0%,
+      var(--accent) 45%,
+      transparent 100%
+    );
+  }
+}
+
+.footer-nav {
+  grid-column: 1;
+  grid-row: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 3rem;
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+
+  li {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    &:hover {
+      color: var(--text);
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.footer-social {
+  grid-column: 2;
+  grid-row: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 3rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 2.5rem;
+  align-items: center;
+
+  li {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--ember);
+      transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    &:hover {
+      color: var(--text);
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.footer-copy {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  border-top: 1px solid var(--border);
+  padding-top: 1.75rem;
+  margin-bottom: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+.footer-quote {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--muted);
+  opacity: 0.75;
+
+  b {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: 1.4em;
+    letter-spacing: 0.04em;
+    color: var(--ember);
+    font-style: normal;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    margin-right: 0.05em;
+  }
+}

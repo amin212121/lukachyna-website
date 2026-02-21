@@ -1,0 +1,470 @@
+// =============================================
+// PUBLICATION DETAIL — DARK ARCHITECT
+// Palette: dark navy · electric blue · ember
+// Fonts: Big Shoulders Display · Plus Jakarta Sans · DM Mono
+// =============================================
+
+:host {
+  display: block;
+  padding-bottom: 8rem;
+}
+
+// ─── GRID OVERLAY ─────────────────────────
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// ─── BACK NAVIGATION ──────────────────────
+
+.back-nav {
+  padding: 2.25rem 0 0;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+
+  .back-arrow {
+    display: inline-block;
+    transition: transform 0.22s;
+  }
+
+  &:hover {
+    color: var(--accent);
+
+    .back-arrow {
+      transform: translateX(-4px);
+    }
+  }
+}
+
+// ─── TYPE BADGE ───────────────────────────
+
+.type-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.6rem;
+  border-radius: 2px;
+
+  &--journal {
+    color: var(--accent);
+    background: rgba(79, 172, 254, 0.1);
+  }
+
+  &--conference {
+    color: var(--ember);
+    background: rgba(255, 92, 43, 0.1);
+  }
+}
+
+// ─── PUBLICATION HERO ─────────────────────
+
+.pub-hero {
+  position: relative;
+  padding: 4rem 0 5.5rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.pub-hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.pub-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.pub-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+.eyebrow-sep {
+  color: rgba(255, 255, 255, 0.15);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+}
+
+.pub-title {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: clamp(2rem, 5.5vw, 7rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 3.5rem;
+  max-width: 1000px;
+}
+
+.pub-hero__footer {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4rem;
+  align-items: start;
+
+  @media (max-width: 599px) {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+.pub-byline,
+.pub-venue-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.meta-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.meta-value {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.meta-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+// ─── PUB BODY ─────────────────────────────
+
+.pub-body {
+  padding: 0;
+}
+
+.pub-section {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 3rem;
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border);
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.pub-section__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 0.15rem;
+}
+
+.pub-section__content {
+  max-width: 680px;
+}
+
+.abstract-text {
+  font-size: 0.975rem;
+  line-height: 1.92;
+  color: rgba(228, 232, 240, 0.76);
+}
+
+.keyword-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.keyword {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.7rem;
+  border-radius: 2px;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+
+  &:hover {
+    border-color: rgba(79, 172, 254, 0.28);
+    color: var(--accent);
+  }
+}
+
+// ─── BIBTEX BLOCK ─────────────────────────
+
+.bibtex-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bibtex-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.bibtex-block__tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.bibtex-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.65rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+
+  &:hover {
+    color: var(--accent);
+    border-color: rgba(79, 172, 254, 0.3);
+  }
+
+  &--copied {
+    color: #52d18a;
+    border-color: rgba(82, 209, 138, 0.3);
+  }
+}
+
+.bibtex-block__pre {
+  margin: 0;
+  padding: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.bibtex-block__code {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.78;
+  color: rgba(228, 232, 240, 0.72);
+  white-space: pre;
+}
+
+// ─── CTA ──────────────────────────────────
+
+.pub-cta-wrapper {
+  border-bottom: 1px solid var(--border);
+}
+
+.pub-cta {
+  padding: 3rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.pub-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.95rem 2rem;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #08090e;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    color 0.25s;
+
+  &:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+}
+
+.pub-cta__arrow {
+  font-size: 0.85rem;
+}
+
+.pub-cta__soon {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pub-cta__soon-dot {
+  color: var(--ember);
+  font-size: 0.7rem;
+}
+
+// ─── RELATED PUBLICATIONS ─────────────────
+
+.related-section {
+  padding: 4.5rem 0 0;
+}
+
+.related-section__title {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.related-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.related-entry {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.25s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.015);
+
+    .related-entry__arrow {
+      transform: translateX(5px);
+      color: var(--accent);
+    }
+  }
+
+  @media (max-width: 599px) {
+    grid-template-columns: 60px 1fr;
+
+    .related-entry__arrow {
+      display: none;
+    }
+  }
+}
+
+.related-entry__left {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 0.5rem;
+}
+
+.related-entry__year {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.related-entry__right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.related-entry__title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.48;
+}
+
+.related-entry__venue {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.related-entry__arrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem;
+  color: var(--muted);
+  transition:
+    transform 0.22s,
+    color 0.22s;
+}
+
+// ─── NOT FOUND ────────────────────────────
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rem 0;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.not-found__num {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: clamp(6rem, 15vw, 18rem);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.04);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.not-found__text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}

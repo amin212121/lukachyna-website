@@ -1,4 +1,123 @@
-<section class="container">
-  Write me on my mail
-  <a class="underline" href="mailto:lukachina.stepan@gmail.com">{{ 'lukachina.stepan@gmail.com' }}</a>
+<!-- ─── HERO ──────────────────────────────────────────── -->
+<section class="contact-hero">
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="container contact-hero__inner">
+    <div class="contact-hero__eyebrow">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>{{ 'contact.heroStatus' | translate }}</span>
+    </div>
+
+    <div class="contact-hero__headline-wrap">
+      <h1 class="contact-hero__headline">
+        <span class="headline-line headline-line--solid">LET'S</span>
+        <span class="headline-line headline-line--outline">TALK.</span>
+      </h1>
+    </div>
+
+    <p class="contact-hero__sub">
+      {{ 'contact.heroSub1' | translate }}<br />
+      {{ 'contact.heroSub2' | translate }}
+    </p>
+  </div>
+</section>
+
+<!-- ─── MAIN CONTENT ─────────────────────────────────── -->
+<section class="contact-main container">
+
+  <!-- Left: Statement -->
+  <div class="contact-statement">
+    <div class="section-eyebrow">
+      <span class="section-num" aria-hidden="true">01</span>
+      <span class="section-label">{{ 'contact.mainLabel' | translate }}</span>
+    </div>
+
+    <h2 class="statement-headline">
+      {{ 'contact.mainHeadline1' | translate }}<br />
+      {{ 'contact.mainHeadline2' | translate }}<br />
+      {{ 'contact.mainHeadline3' | translate }}<br />
+      <span class="statement-headline--accent">{{ 'contact.mainHeadlineAccent' | translate }}</span>
+    </h2>
+
+    <p class="statement-body">{{ 'contact.mainBody' | translate }}</p>
+
+    <div class="statement-availability">
+      <span class="avail-dot" aria-hidden="true"></span>
+      <span>{{ 'contact.mainAvailability' | translate }}</span>
+    </div>
+  </div>
+
+  <!-- Right: Contact Channels -->
+  <div class="contact-channels">
+    <div class="section-eyebrow">
+      <span class="section-num" aria-hidden="true">02</span>
+      <span class="section-label">{{ 'contact.channelsLabel' | translate }}</span>
+    </div>
+
+    <div class="channel-cards">
+      <a href="mailto:lukachina.stepan@gmail.com" class="channel-card">
+        <div class="channel-card__meta">
+          <span class="channel-card__num">01</span>
+          <span class="channel-card__platform">Email</span>
+        </div>
+        <div class="channel-card__body">
+          <span class="channel-card__handle">lukachina.stepan&#64;gmail.com</span>
+          <span class="channel-card__arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="channel-card__desc">{{ 'contact.emailDesc' | translate }}</div>
+      </a>
+
+      <a href="https://www.linkedin.com/in/stepan-lukachyna-837b651b7/" target="_blank" rel="noopener noreferrer" class="channel-card">
+        <div class="channel-card__meta">
+          <span class="channel-card__num">02</span>
+          <span class="channel-card__platform">LinkedIn</span>
+        </div>
+        <div class="channel-card__body">
+          <span class="channel-card__handle">in/stepan-lukachyna</span>
+          <span class="channel-card__arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="channel-card__desc">{{ 'contact.linkedinDesc' | translate }}</div>
+      </a>
+
+      <a href="https://github.com/amin212121" target="_blank" rel="noopener noreferrer" class="channel-card">
+        <div class="channel-card__meta">
+          <span class="channel-card__num">03</span>
+          <span class="channel-card__platform">GitHub</span>
+        </div>
+        <div class="channel-card__body">
+          <span class="channel-card__handle">&#64;stepan-lukachyna</span>
+          <span class="channel-card__arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="channel-card__desc">{{ 'contact.githubDesc' | translate }}</div>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─── PHILOSOPHY / AVAILABILITY ──────────────────── -->
+<section class="contact-philosophy">
+  <div class="container">
+    <div class="philosophy__inner">
+
+      <blockquote class="philosophy__quote">
+        <p class="philosophy__text">
+          {{ 'contact.philosophyText' | translate }}<span class="accent-dash">—</span>{{ 'contact.philosophyTextAccent' | translate }}
+        </p>
+        <footer class="philosophy__attr">
+          <span class="philosophy__attr-line" aria-hidden="true"></span>
+          <cite class="philosophy__attr-text">{{ 'contact.philosophyAttr' | translate }}</cite>
+        </footer>
+      </blockquote>
+
+      <div class="philosophy__badge" aria-hidden="true">
+        <div class="badge-ring"></div>
+        <div class="badge-content">
+          <span class="badge-status">{{ 'contact.philosophyAvailable' | translate }}</span>
+          <span class="badge-year">2026</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>

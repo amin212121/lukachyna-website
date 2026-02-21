@@ -1,12 +1,123 @@
-<section class="container">
-  <ul>
-    <li>
-      TOOLS FOR MANAGEMENT OF ELECTRONIC COMMERCE ENTERPRISES -
-      <a href="http://visnyk-ekon.uzhnu.edu.ua/article/view/303411">Link</a>
-    </li>
-    <li>
-      CONCEPTUAL PRINCIPLES OF MANAGEMENT OF ELECTRONIC COMMERCE ENTERPRISES -
-      <a href="http://visnyk-ekon.uzhnu.edu.ua/article/view/278441">Link</a>
-    </li>
-  </ul>
+<!-- ─── PAGE HEADER ─────────────────────────────────────── -->
+<section class="pub-header">
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="container pub-header__inner">
+    <div class="pub-header__eyebrow">
+      <span class="section-num">04</span>
+      <span class="eyebrow-sep" aria-hidden="true">·</span>
+      <span class="section-label">{{ 'pub.eyebrow' | translate }}</span>
+    </div>
+
+    <h1 class="pub-header__title">
+      <span class="title-line title-line--solid">PUBLICATIONS /</span>
+      <span class="title-line title-line--outline">RESEARCH</span>
+    </h1>
+
+    <div class="pub-stats">
+      <div class="stat">
+        <span class="stat__num">{{ publications.length }}</span>
+        <span class="stat__label">{{ 'pub.statsPublications' | translate }}</span>
+      </div>
+      <div class="stat-sep" aria-hidden="true">·</div>
+      <div class="stat">
+        <span class="stat__num">{{ journalCount }}</span>
+        <span class="stat__label">{{ 'pub.statsJournals' | translate }}</span>
+      </div>
+      <div class="stat-sep" aria-hidden="true">·</div>
+      <div class="stat">
+        <span class="stat__num">{{ conferenceCount }}</span>
+        <span class="stat__label">{{ 'pub.statsConference' | translate }}</span>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- ─── FILTER BAR ──────────────────────────────────────── -->
+<div class="filter-bar">
+  <div class="container filter-bar__inner">
+    @for (f of filters; track f) {
+      <button
+        class="filter-chip"
+        [class.filter-chip--active]="activeFilter === f"
+        (click)="setFilter(f)"
+      >
+        {{ f === 'All' ? ('common.all' | translate) : f }}
+      </button>
+    }
+  </div>
+</div>
+
+<!-- ─── PUBLICATIONS LIST ────────────────────────────────── -->
+<div class="pub-section container">
+  @if (filteredPublications.length === 0) {
+    <div class="empty-state">
+      <span class="empty-state__dash" aria-hidden="true">—</span>
+      <p class="empty-state__text">{{ 'pub.emptyState' | translate }}</p>
+    </div>
+  } @else {
+    <div class="pub-list">
+      @for (pub of filteredPublications; track pub.id; let i = $index) {
+        <article class="pub-entry">
+
+          <!-- Left: index + year -->
+          <div class="pub-entry__left">
+            <span class="pub-entry__index" aria-hidden="true">{{ formatIndex(i) }}</span>
+            <span class="pub-entry__year">{{ pub.year }}</span>
+          </div>
+
+          <!-- Right: full content -->
+          <div class="pub-entry__right">
+            <div class="pub-entry__top">
+              <span class="type-badge type-badge--{{ pub.type }}">
+                {{ pub.type === 'journal' ? ('pub.journal' | translate) : ('pub.conference' | translate) }}
+              </span>
+            </div>
+
+            <h2 class="pub-entry__title">{{ pub.title }}</h2>
+
+            <p class="pub-entry__authors">{{ pub.authors }}</p>
+
+            <div class="pub-entry__venue">
+              <span class="venue-name">{{ pub.venue }}</span>
+              <span class="venue-sep" aria-hidden="true">·</span>
+              <span class="venue-meta">{{ pub.venueShort }}</span>
+            </div>
+
+            <p class="pub-entry__abstract">{{ pub.abstract }}</p>
+
+            <div class="pub-entry__footer">
+              <div class="keyword-list">
+                @for (kw of pub.keywords; track kw) {
+                  <span class="keyword">{{ kw }}</span>
+                }
+              </div>
+
+              <div class="pub-entry__actions">
+                <a [routerLink]="['/publications', pub.id]" class="read-link read-link--detail">
+                  {{ 'pub.details' | translate }}
+                  <span class="read-arrow" aria-hidden="true">→</span>
+                </a>
+
+                @if (pub.url) {
+                  <a
+                    [href]="pub.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="read-link"
+                  >
+                    {{ 'pub.readPaper' | translate }}
+                    <span class="read-arrow" aria-hidden="true">↗</span>
+                  </a>
+                } @else {
+                  <span class="link-soon">{{ 'pub.preprintSoon' | translate }}</span>
+                }
+              </div>
+            </div>
+          </div>
+
+        </article>
+      }
+    </div>
+  }
+</div>

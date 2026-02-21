@@ -1,0 +1,420 @@
+// =============================================
+// CONTACT — DARK ARCHITECT
+// Palette: dark navy · electric blue · ember
+// Fonts: Big Shoulders Display · Plus Jakarta Sans · DM Mono
+// =============================================
+
+:host {
+  display: block;
+}
+
+// ─── HERO ─────────────────────────────────────
+
+.contact-hero {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 6rem 0 8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: pulse-dot 2.5s ease-in-out infinite;
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(79, 172, 254, 0.5); }
+    50%       { box-shadow: 0 0 0 8px rgba(79, 172, 254, 0); }
+  }
+}
+
+.contact-hero__headline-wrap {
+  margin-bottom: 2rem;
+}
+
+.contact-hero__headline {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: clamp(5rem, 14vw, 14rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  display: block;
+}
+
+.headline-line {
+  display: block;
+
+  &--solid {
+    color: var(--text);
+  }
+
+  &--outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--accent);
+  }
+}
+
+.contact-hero__sub {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: rgba(228, 232, 240, 0.55);
+  max-width: 520px;
+}
+
+// ─── MAIN CONTENT ─────────────────────────────
+
+.contact-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+
+  @media (max-width: 1023px) {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}
+
+// Section eyebrow (mirrors global pattern, scoped here)
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+// ─── STATEMENT ────────────────────────────────
+
+.statement-headline {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 2.5rem;
+
+  &--accent {
+    color: var(--accent);
+    display: block;
+    margin-top: 0.1em;
+  }
+}
+
+.statement-body {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 400px;
+  margin-bottom: 2.5rem;
+}
+
+.statement-availability {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.avail-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: pulse-green 2.5s ease-in-out infinite;
+
+  @keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    50%       { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+  }
+}
+
+// ─── CHANNEL CARDS ────────────────────────────
+
+.channel-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.channel-card {
+  display: block;
+  padding: 1.75rem 2rem;
+  background: var(--bg);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: background 0.25s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background: var(--surface);
+
+    &::before {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+
+    .channel-card__arrow {
+      transform: translateX(4px);
+      color: var(--accent);
+    }
+
+    .channel-card__handle {
+      color: var(--text);
+    }
+  }
+}
+
+.channel-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.channel-card__num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.channel-card__platform {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.channel-card__body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.channel-card__handle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: color 0.25s;
+  word-break: break-all;
+}
+
+.channel-card__arrow {
+  font-size: 1.1rem;
+  color: var(--muted);
+  transition: transform 0.25s, color 0.25s;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.channel-card__desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: rgba(90, 100, 129, 0.7);
+}
+
+// ─── PHILOSOPHY / QUOTE ───────────────────────
+
+.contact-philosophy {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding: 8rem 0 10rem;
+}
+
+.philosophy__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.philosophy__quote {
+  margin: 0;
+}
+
+.philosophy__text {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+
+.accent-dash {
+  color: var(--accent);
+  margin: 0 0.1em;
+}
+
+.philosophy__attr {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.philosophy__attr-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--border);
+}
+
+.philosophy__attr-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-style: normal;
+}
+
+// Spinning badge
+.philosophy__badge {
+  position: relative;
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.badge-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(79, 172, 254, 0.2);
+  border-radius: 50%;
+  animation: spin-slow 16s linear infinite;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+}
+
+.badge-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.badge-status {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.badge-year {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.08);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}

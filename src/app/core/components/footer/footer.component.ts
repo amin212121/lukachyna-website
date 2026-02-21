@@ -1,18 +1,12 @@
 import { Component } from '@angular/core'
-import { SearchBarComponent } from '../../../shared/components/widgets/search-bar/search-bar.component'
-import {
-  AppearanceSelectorComponent,
-} from '../../../shared/components/elements/appearance-selector/appearance-selector.component'
 import { RouterLink } from '@angular/router'
-import {
-  LanguageSelectorComponent,
-} from '../../../shared/components/elements/language-selector/language-selector.component'
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe'
 
 @Component({
   selector: 'ly-footer-component',
   templateUrl: './footer.component.html',
+  styleUrl: './footer.component.scss',
   standalone: true,
+  imports: [TranslatePipe, RouterLink],
 })
-
-export class FooterComponent {
-}
+export class FooterComponent {}
