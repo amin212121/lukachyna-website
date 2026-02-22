@@ -1,76 +1,142 @@
-<header class="container flex items-center justify-between py-6 lg:py-10">
+<header class="container flex items-center py-6 lg:py-10">
+  <!-- Hamburger (mobile only) -->
   <button
-    class="flex flex-col items-center justify-center lg:hidden"
-    (click)="mobileMenuClickHandler()"
+    class="flex flex-col justify-center gap-[6px] p-1 mr-4 lg:hidden shrink-0"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="isMobileMenuOpen"
     aria-label="Toggle menu"
   >
-    <span
-      class="bg-[var(--text)] transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm {{
-        isMobileMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'
-      }}"
-    ></span>
-    <span
-      class="bg-[var(--text)] transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 {{
-        isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
-      }}"
-    ></span>
-    <span
-      class="bg-[var(--text)] transition-transform duration-300 ease-out h-0.5 w-6 rounded-sm {{
-        isMobileMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-0.5'
-      }}"
-    ></span>
+    <span class="h-line h-line--top" [class.is-open]="isMobileMenuOpen"></span>
+    <span class="h-line h-line--mid" [class.is-open]="isMobileMenuOpen"></span>
+    <span class="h-line h-line--bot" [class.is-open]="isMobileMenuOpen"></span>
   </button>
 
-  <div class="mr-6">
-    <a
-      routerLink="/"
-      class="text-2xl font-bold tracking-tight text-[var(--text)] hover:text-[#4facfe] transition-colors duration-200"
-      style="font-family: 'Big Shoulders Display', sans-serif; letter-spacing: -0.01em;"
-    >Lukachyna</a>
-  </div>
+  <!-- Logo -->
+  <a
+    routerLink="/"
+    class="text-2xl font-bold tracking-tight text-[var(--text)] hover:text-[var(--accent)] transition-colors duration-200 flex-1 lg:flex-none lg:mr-6"
+    style="font-family: 'Big Shoulders Display', sans-serif; letter-spacing: -0.01em;"
+  >Lukachyna</a>
 
-  <nav class="mr-6 {{ isMobileMenuOpen ? '' : 'hidden' }} lg:block">
-    <ul class="inline-flex flex-col lg:flex-row [&>li:not(:last-child)]:mr-10">
+  <!-- Desktop nav -->
+  <nav class="hidden lg:block mr-auto">
+    <ul class="flex items-center gap-10">
       <li>
         <a
           routerLink="/"
-          class="text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200 tracking-widest uppercase"
+          class="desk-nav-link"
           style="font-family: 'DM Mono', monospace;"
         >{{ 'nav.home' | translate }}</a>
       </li>
       <li>
         <a
           routerLink="/projects"
-          class="text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200 tracking-widest uppercase"
+          class="desk-nav-link"
           style="font-family: 'DM Mono', monospace;"
         >{{ 'nav.projects' | translate }}</a>
       </li>
       <li>
         <a
           routerLink="/blog"
-          class="text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200 tracking-widest uppercase"
+          class="desk-nav-link"
           style="font-family: 'DM Mono', monospace;"
         >{{ 'nav.blog' | translate }}</a>
       </li>
       <li>
         <a
           routerLink="/publications"
-          class="text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200 tracking-widest uppercase"
+          class="desk-nav-link"
           style="font-family: 'DM Mono', monospace;"
         >{{ 'nav.publications' | translate }}</a>
       </li>
       <li>
         <a
           routerLink="/contact"
-          class="text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200 tracking-widest uppercase"
+          class="desk-nav-link"
           style="font-family: 'DM Mono', monospace;"
         >{{ 'nav.contact' | translate }}</a>
       </li>
     </ul>
   </nav>
 
-  <div class="flex items-center gap-3">
+  <!-- Controls -->
+  <div class="flex items-center gap-3 ml-auto lg:ml-0">
     <ly-appearance-selector />
     <ly-language-selector />
   </div>
 </header>
+
+<!-- Mobile menu overlay -->
+<div class="mobile-menu lg:hidden" [class.is-open]="isMobileMenuOpen">
+  <!-- Backdrop -->
+  <div class="mobile-menu__backdrop" (click)="closeMenu()"></div>
+
+  <!-- Slide-in panel -->
+  <div class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="Navigation">
+    <!-- Panel top row -->
+    <div class="flex items-center justify-between mb-10">
+      <a
+        routerLink="/"
+        (click)="closeMenu()"
+        class="text-xl font-bold text-[var(--text)]"
+        style="font-family: 'Big Shoulders Display', sans-serif;"
+      >Lukachyna</a>
+      <button
+        (click)="closeMenu()"
+        aria-label="Close menu"
+        class="p-1.5 text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Nav links -->
+    <nav>
+      <ul class="flex flex-col">
+        <li>
+          <a
+            routerLink="/"
+            (click)="closeMenu()"
+            class="mobile-nav-link"
+            style="font-family: 'DM Mono', monospace;"
+          >{{ 'nav.home' | translate }}</a>
+        </li>
+        <li>
+          <a
+            routerLink="/projects"
+            (click)="closeMenu()"
+            class="mobile-nav-link"
+            style="font-family: 'DM Mono', monospace;"
+          >{{ 'nav.projects' | translate }}</a>
+        </li>
+        <li>
+          <a
+            routerLink="/blog"
+            (click)="closeMenu()"
+            class="mobile-nav-link"
+            style="font-family: 'DM Mono', monospace;"
+          >{{ 'nav.blog' | translate }}</a>
+        </li>
+        <li>
+          <a
+            routerLink="/publications"
+            (click)="closeMenu()"
+            class="mobile-nav-link"
+            style="font-family: 'DM Mono', monospace;"
+          >{{ 'nav.publications' | translate }}</a>
+        </li>
+        <li>
+          <a
+            routerLink="/contact"
+            (click)="closeMenu()"
+            class="mobile-nav-link"
+            style="font-family: 'DM Mono', monospace;"
+          >{{ 'nav.contact' | translate }}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
