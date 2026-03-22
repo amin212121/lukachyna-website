@@ -31,6 +31,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "dist/*"
-          target: "/var/www/lukachyna.com"
+          target: "/opt/apps/lukachyna.com"
+          rm: 1
           overwrite: 1
           strip_components: 1
