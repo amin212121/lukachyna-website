@@ -1,0 +1,150 @@
+// =============================================
+// NOT FOUND — catch-all for unmatched routes
+// Fonts: Big Shoulders Display · Plus Jakarta Sans · DM Mono
+// =============================================
+
+:host {
+  display: block;
+}
+
+.nf {
+  padding: 6rem 0 8rem;
+}
+
+.nf__inner {
+  max-width: 52rem;
+}
+
+// ─── HEAD ─────────────────────────────────────
+
+.nf__eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+// Oversized numeral, kept decorative — the heading carries the meaning.
+.nf__code {
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
+  font-size: clamp(7rem, 26vw, 16rem);
+  font-weight: 900;
+  line-height: 0.78;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border);
+  margin-bottom: 1.5rem;
+  user-select: none;
+}
+
+.nf__title {
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  margin-bottom: 1.25rem;
+}
+
+.nf__body {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 34rem;
+  margin-bottom: 2.5rem;
+}
+
+// ─── ACTIONS ──────────────────────────────────
+
+.nf__cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.75rem;
+  background: var(--accent);
+  color: #08090e;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: filter 0.2s, transform 0.2s;
+
+  &:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.75rem;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.875rem;
+  border-radius: 2px;
+  transition: border-color 0.25s, color 0.25s;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+// ─── SECTION LINKS ────────────────────────────
+
+.nf__links {
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.nf__links-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+.nf__links-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  a {
+    font-size: 0.95rem;
+    color: var(--muted);
+    transition: color 0.25s;
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .nf {
+    padding: 4rem 0 5rem;
+  }
+
+  .nf__cta {
+    margin-bottom: 3rem;
+  }
+}

@@ -9,6 +9,7 @@ import { PublicationDetailComponent } from './features/publication-detail/public
 import { ServicesComponent } from './features/services/services.component'
 import { TermsComponent } from './features/terms/terms.component'
 import { PrivacyComponent } from './features/privacy/privacy.component'
+import { NotFoundComponent } from './features/not-found/not-found.component'
 
 // The /cms route is unpublished on purpose. LiqPay reviews a merchant site for
 // "неактивних меню" — half-built sections — and CmsComponent is a single sentence
@@ -65,5 +66,11 @@ export const routes: Routes = [
     path: 'privacy',
     title: 'titles.privacy',
     component: PrivacyComponent,
+  },
+  // Must stay last: it matches anything the routes above did not.
+  {
+    path: '**',
+    title: 'titles.notFound',
+    component: NotFoundComponent,
   },
 ]

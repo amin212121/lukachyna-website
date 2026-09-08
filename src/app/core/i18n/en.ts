@@ -173,6 +173,14 @@ export const en = {
     sellerPhone: 'Phone',
     placeholderWarning: 'Seller details have not been filled in yet — the values below are placeholders.',
   },
+  notFound: {
+    eyebrow: 'Error 404',
+    title: 'This page does not exist',
+    body: 'The address you followed does not lead anywhere on this site. It may have been moved, or the link may have been mistyped.',
+    ctaHome: 'Back to home',
+    ctaContact: 'Get in touch',
+    linksLabel: 'Try one of these',
+  },
   titles: {
     home: 'Lukachyna — software engineer & mentor',
     services: 'Services — Lukachyna',
@@ -184,5 +192,6 @@ export const en = {
     contact: 'Contact — Lukachyna',
     terms: 'Public offer — Lukachyna',
     privacy: 'Privacy notice — Lukachyna',
+    notFound: 'Page not found — Lukachyna',
   },
 }

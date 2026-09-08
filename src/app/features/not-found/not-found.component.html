@@ -1,0 +1,26 @@
+<section class="nf">
+  <div class="container nf__inner">
+    <p class="nf__eyebrow">{{ 'notFound.eyebrow' | translate }}</p>
+
+    <p class="nf__code" aria-hidden="true">404</p>
+
+    <h1 class="nf__title">{{ 'notFound.title' | translate }}</h1>
+    <p class="nf__body">{{ 'notFound.body' | translate }}</p>
+
+    <div class="nf__cta">
+      <a routerLink="/" class="btn-primary">{{ 'notFound.ctaHome' | translate }}</a>
+      <a routerLink="/contact" class="btn-ghost">{{ 'notFound.ctaContact' | translate }}</a>
+    </div>
+
+    <nav class="nf__links" [attr.aria-label]="'notFound.linksLabel' | translate">
+      <p class="nf__links-label">{{ 'notFound.linksLabel' | translate }}</p>
+      <ul class="nf__links-list">
+        @for (link of links; track link.path) {
+          <li>
+            <a [routerLink]="link.path">{{ link.key | translate }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+  </div>
+</section>
