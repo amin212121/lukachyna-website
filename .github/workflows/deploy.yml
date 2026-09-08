@@ -31,23 +31,32 @@ jobs:
       - name: Build Angular app
         run: npm run build -- --configuration production
 
+      # Secrets are passed through env rather than interpolated into the script
+      # body, so their values never land in the generated script on the runner.
       - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts 2>/dev/null
 
       # rsync updates files in place (atomic per-file rename), so the site is
       # never missing from disk mid-deploy. --delete-after drops files that no
       # longer exist in the build, but only once every transfer has succeeded,
       # so a failed deploy cannot leave the site with assets already removed.
       - name: Deploy via rsync
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
           rsync -az --delete-after --checksum --human-readable --stats \
             -e "ssh -i ~/.ssh/deploy_key" \
             dist/browser/ \
-            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/apps/lukachyna.com/browser/"
+            "${SERVER_USER}@${SERVER_HOST}:/opt/apps/lukachyna.com/browser/"
 
       # Routes come from the build's own prerender manifest, so this check can
       # never drift from what was actually deployed.
