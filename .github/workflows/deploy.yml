@@ -4,34 +4,62 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+# Never let two deploys write to the server at the same time.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 23
+          node-version: 22
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Angular app
         run: npm run build -- --configuration production
 
-      - name: Deploy via SSH
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "dist/*"
-          target: "/opt/apps/lukachyna.com"
-          rm: 1
-          overwrite: 1
-          strip_components: 1
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
+
+      # rsync updates files in place (atomic per-file rename), so the site is
+      # never missing from disk mid-deploy. --delete-after drops files that no
+      # longer exist in the build, but only once every transfer has succeeded,
+      # so a failed deploy cannot leave the site with assets already removed.
+      - name: Deploy via rsync
+        run: |
+          rsync -az --delete-after --checksum --human-readable --stats \
+            -e "ssh -i ~/.ssh/deploy_key" \
+            dist/browser/ \
+            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/apps/lukachyna.com/browser/"
+
+      - name: Verify deployment
+        run: |
+          for path in / /blog/ /terms/ /privacy/ /payment/; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' --retry 3 --retry-delay 5 -m 20 "https://lukachyna.com${path}")
+            echo "${path} -> ${code}"
+            [ "$code" = "200" ] || { echo "::error::${path} returned ${code}, expected 200"; exit 1; }
+          done
+          type=$(curl -sSI -m 20 https://lukachyna.com/stepan_lukachyna_cv.pdf | tr -d '\r' | awk -F': ' 'tolower($1)=="content-type"{print $2}')
+          echo "cv content-type -> ${type}"
+          case "$type" in application/pdf*) ;; *) echo "::error::CV is not being served as a PDF (got '${type}')"; exit 1 ;; esac
+
+      - name: Clean up SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
