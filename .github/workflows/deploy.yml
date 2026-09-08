@@ -70,9 +70,22 @@ jobs:
             [ "$code" = "200" ] || { echo "::error::${path} returned ${code}, expected 200"; failed=1; }
           done < <(python3 -c "import json;print('\n'.join(json.load(open('dist/prerendered-routes.json'))['routes']))")
 
-          type=$(curl -sSI -m 20 https://lukachyna.com/stepan_lukachyna_cv.pdf | tr -d '\r' | awk -F': ' 'tolower($1)=="content-type"{print $2}')
-          echo "/stepan_lukachyna_cv.pdf -> ${type}"
-          case "$type" in application/pdf*) ;; *) echo "::error::CV is not served as a PDF (got '${type}')"; failed=1 ;; esac
+          # Assets the site references but that are not in the route manifest,
+          # so moving or dropping one cannot slip through unnoticed.
+          check_asset() {
+            local path=$1 expected=$2 type
+            type=$(curl -sSI -m 20 "https://lukachyna.com${path}" | tr -d '\r' | awk -F': ' 'tolower($1)=="content-type"{print $2}')
+            echo "${path} -> ${type}"
+            case "$type" in
+              $expected*) ;;
+              *) echo "::error::${path} served as '${type}', expected ${expected}"; failed=1 ;;
+            esac
+          }
+
+          check_asset /stepan_lukachyna_cv.pdf application/pdf
+          for mark in liqpay-light liqpay-dark visa mastercard; do
+            check_asset "/icons/payment/${mark}.svg" image/svg+xml
+          done
 
           exit $failed
 
