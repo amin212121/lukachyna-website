@@ -49,16 +49,23 @@ jobs:
             dist/browser/ \
             "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/apps/lukachyna.com/browser/"
 
+      # Routes come from the build's own prerender manifest, so this check can
+      # never drift from what was actually deployed.
       - name: Verify deployment
+        shell: bash
         run: |
-          for path in / /blog/ /terms/ /privacy/ /payment/; do
-            code=$(curl -sS -o /dev/null -w '%{http_code}' --retry 3 --retry-delay 5 -m 20 "https://lukachyna.com${path}")
+          failed=0
+          while read -r path; do
+            code=$(curl -sSL -o /dev/null -w '%{http_code}' --retry 3 --retry-delay 5 -m 20 "https://lukachyna.com${path}")
             echo "${path} -> ${code}"
-            [ "$code" = "200" ] || { echo "::error::${path} returned ${code}, expected 200"; exit 1; }
-          done
+            [ "$code" = "200" ] || { echo "::error::${path} returned ${code}, expected 200"; failed=1; }
+          done < <(python3 -c "import json;print('\n'.join(json.load(open('dist/prerendered-routes.json'))['routes']))")
+
           type=$(curl -sSI -m 20 https://lukachyna.com/stepan_lukachyna_cv.pdf | tr -d '\r' | awk -F': ' 'tolower($1)=="content-type"{print $2}')
-          echo "cv content-type -> ${type}"
-          case "$type" in application/pdf*) ;; *) echo "::error::CV is not being served as a PDF (got '${type}')"; exit 1 ;; esac
+          echo "/stepan_lukachyna_cv.pdf -> ${type}"
+          case "$type" in application/pdf*) ;; *) echo "::error::CV is not served as a PDF (got '${type}')"; failed=1 ;; esac
+
+          exit $failed
 
       - name: Clean up SSH key
         if: always()
