@@ -32,7 +32,8 @@
   padding: 0;
   margin: 0 0 3rem;
   display: flex;
-  gap: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
   align-items: center;
 
   li {
@@ -110,7 +111,7 @@
 
 .footer-copy {
   grid-column: 1 / -1;
-  grid-row: 2;
+  grid-row: 3;
   border-top: 1px solid var(--border);
   padding-top: 1.75rem;
   margin-bottom: 1rem;
@@ -124,7 +125,7 @@
 
 .footer-quote {
   grid-column: 1 / -1;
-  grid-row: 3;
+  grid-row: 4;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 300;
   font-size: 0.95rem;
@@ -133,7 +134,7 @@
   opacity: 0.75;
 
   b {
-    font-family: 'Big Shoulders Display', sans-serif;
+    font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
     font-weight: 900;
     font-size: 1.4em;
     letter-spacing: 0.04em;
@@ -143,5 +144,97 @@
     line-height: 1;
     vertical-align: middle;
     margin-right: 0.05em;
+  }
+}
+
+// ─── SELLER IDENTITY & PAYMENT MARKS ──────────
+// LiqPay requires the seller's legal name, tax id and Ukrainian address on the
+// site, and the current LiqPay logo alongside the card scheme marks.
+
+.footer-legal {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  border-top: 1px solid var(--border);
+  padding-top: 1.75rem;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem 3rem;
+  align-items: start;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-seller__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+
+.footer-seller__line {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 34rem;
+
+  a:hover {
+    color: var(--accent);
+  }
+}
+
+.footer-seller__sep {
+  margin: 0 0.5rem;
+  opacity: 0.5;
+}
+
+// Unfilled merchant data is meant to be impossible to miss before launch.
+.is-placeholder {
+  color: var(--ember);
+}
+
+.footer-payments {
+  @media (max-width: 767px) {
+    justify-self: start;
+  }
+}
+
+.footer-marks {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.mark {
+  display: block;
+
+  &--liqpay {
+    height: 1.25rem;
+    width: auto;
+  }
+
+  &--card {
+    height: 1.9rem;
+    width: auto;
+  }
+}
+
+.mark--on-light {
+  display: none;
+}
+
+:host-context(html[data-theme='light']) {
+  .mark--on-dark {
+    display: none;
+  }
+
+  .mark--on-light {
+    display: block;
   }
 }

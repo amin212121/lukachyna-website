@@ -191,7 +191,7 @@
 // Title
 
 .page-hero__title {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: clamp(4.5rem, 12vw, 12rem);
   font-weight: 900;
   line-height: 0.88;
@@ -240,7 +240,7 @@
 }
 
 .stat__num {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: 2rem;
   font-weight: 800;
   color: var(--accent);
@@ -325,7 +325,7 @@
 .featured-card__ghost-num {
   position: relative;
   z-index: 1;
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: clamp(8rem, 16vw, 18rem);
   font-weight: 900;
   color: rgba(79, 172, 254, 0.06);
@@ -410,7 +410,7 @@
 }
 
 .featured-card__title {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: clamp(2.25rem, 4vw, 4rem);
   font-weight: 900;
   color: var(--text);
@@ -661,7 +661,7 @@
 }
 
 .cta__headline {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: clamp(3rem, 7vw, 7rem);
   font-weight: 900;
   line-height: 0.9;

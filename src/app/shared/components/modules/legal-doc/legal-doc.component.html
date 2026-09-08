@@ -1,0 +1,85 @@
+<article class="legal">
+  <div class="container legal__inner">
+
+    <!-- ─── HEADER ─────────────────────────────────── -->
+    <header class="legal__head">
+      <div class="legal__eyebrow">{{ 'legal.eyebrow' | translate }}</div>
+      <h1 class="legal__title">{{ docTitle() }}</h1>
+      <p class="legal__sub">{{ docSub() }}</p>
+      <p class="legal__updated">
+        {{ 'legal.updated' | translate }}: <time [attr.datetime]="updated">{{ updated }}</time>
+      </p>
+    </header>
+
+    <!-- ─── CONTENTS ───────────────────────────────── -->
+    <nav class="legal__toc" [attr.aria-label]="'legal.contents' | translate">
+      <div class="legal__toc-label">{{ 'legal.contents' | translate }}</div>
+      <ol class="legal__toc-list">
+        @for (block of blocks(); track $index) {
+          <li>
+            <a [routerLink]="[]" [fragment]="sectionId($index)">
+              <span class="legal__toc-num">{{ padIndex($index) }}</span>
+              <span>{{ pick(block.heading) }}</span>
+            </a>
+          </li>
+        }
+      </ol>
+    </nav>
+
+    <!-- ─── SECTIONS ───────────────────────────────── -->
+    <div class="legal__body">
+      @for (block of blocks(); track $index) {
+        <section class="legal__section" [id]="sectionId($index)">
+          <h2 class="legal__heading">
+            <span class="legal__heading-num" aria-hidden="true">{{ padIndex($index) }}</span>
+            <span>{{ pick(block.heading) }}</span>
+          </h2>
+
+          @for (paragraph of pick(block.body); track $index) {
+            <p class="legal__p">{{ paragraph }}</p>
+          }
+
+          @if (block.bullets) {
+            <ul class="legal__list">
+              @for (bullet of pick(block.bullets); track $index) {
+                <li>{{ bullet }}</li>
+              }
+            </ul>
+          }
+        </section>
+      }
+    </div>
+
+    <!-- ─── SELLER DETAILS ─────────────────────────── -->
+    <section class="legal__seller" id="seller">
+      <h2 class="legal__heading legal__heading--seller">{{ 'legal.sellerLabel' | translate }}</h2>
+
+      @if (!configured) {
+        <p class="legal__warning" role="status">{{ 'legal.placeholderWarning' | translate }}</p>
+      }
+
+      <dl class="legal__details">
+        <dt>{{ 'legal.sellerName' | translate }}</dt>
+        <dd>{{ pick(merchant.legalName) }}</dd>
+
+        <dt>{{ pick(taxIdLabel) }}</dt>
+        <dd>{{ merchant.taxId }}</dd>
+
+        <dt>{{ 'legal.sellerAddress' | translate }}</dt>
+        <dd>{{ pick(merchant.address) }}</dd>
+
+        <dt>{{ 'legal.sellerEmail' | translate }}</dt>
+        <dd><a [href]="'mailto:' + merchant.email">{{ merchant.email }}</a></dd>
+
+        <dt>{{ 'legal.sellerPhone' | translate }}</dt>
+        <dd>{{ merchant.phone }}</dd>
+
+        @if (merchant.registration) {
+          <dt>&nbsp;</dt>
+          <dd>{{ pick(merchant.registration) }}</dd>
+        }
+      </dl>
+    </section>
+
+  </div>
+</article>

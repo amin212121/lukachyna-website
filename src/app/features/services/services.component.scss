@@ -1,0 +1,389 @@
+// =============================================
+// SERVICES — the offer page
+// Palette: dark navy · electric blue · ember
+// Oswald carries Cyrillic for the display faces.
+// =============================================
+
+:host {
+  display: block;
+}
+
+// ─── HERO ─────────────────────────────────────
+
+.svc-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 0 5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.svc-hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.svc-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.svc-hero__headline {
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
+  font-size: clamp(3.5rem, 11vw, 9rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 1.75rem;
+}
+
+.svc-hero__sub {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+// ─── SECTION LABELS ───────────────────────────
+
+.svc-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+.svc-main {
+  padding-bottom: 1rem;
+}
+
+.svc-list {
+  display: grid;
+  gap: 0;
+}
+
+// ─── OFFER ────────────────────────────────────
+
+.offer {
+  padding: 2.5rem 0 3.5rem;
+  border-bottom: 1px solid var(--border);
+
+  &--featured {
+    padding-top: 0;
+    border-bottom: none;
+  }
+}
+
+.offer__head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.offer__num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.offer__name {
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
+  font-size: clamp(1.9rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-wrap: balance;
+
+  &--featured {
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    margin-bottom: 2.25rem;
+  }
+}
+
+.offer__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 17rem;
+  gap: 3.5rem;
+
+  @media (max-width: 1023px) {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.offer:not(.offer--featured) .offer__grid {
+  padding-left: 2.5rem;
+
+  @media (max-width: 1023px) {
+    padding-left: 0;
+  }
+}
+
+.offer__summary {
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 38rem;
+  margin-bottom: 2rem;
+
+  &--featured {
+    font-size: 1.08rem;
+    color: var(--text);
+  }
+}
+
+.offer__block + .offer__block {
+  margin-top: 1.75rem;
+}
+
+.offer__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
+}
+
+.offer__includes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.6rem;
+
+  li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.92rem;
+    line-height: 1.7;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75em;
+      width: 0.5rem;
+      height: 1px;
+      background: var(--accent);
+    }
+  }
+}
+
+.offer__turnaround {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 32rem;
+}
+
+// ─── PRICE & CTA ──────────────────────────────
+
+.offer__buy {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.75rem;
+  align-self: start;
+}
+
+.offer--featured .offer__buy {
+  border-color: var(--accent);
+}
+
+.offer__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.offer__amount {
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+.offer__currency {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.offer__price-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.offer__cta {
+  display: block;
+  margin-top: 1.5rem;
+  text-align: center;
+  padding: 0.85rem 1.25rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: #08090e;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.offer__cta-note {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin-top: 0.9rem;
+}
+
+// ─── HOW TO ORDER & PAYMENT ───────────────────
+
+.svc-payment {
+  padding: 5rem 0 7rem;
+}
+
+.svc-payment__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+  gap: 4rem;
+  align-items: start;
+
+  @media (max-width: 1023px) {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+.svc-payment__title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.step {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.step__num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.step__text {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.svc-payment__body {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 40rem;
+  margin-bottom: 1.25rem;
+}
+
+.svc-payment__terms {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 40rem;
+  margin-bottom: 2.25rem;
+
+  a {
+    color: var(--accent);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.svc-payment__marks {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.mark {
+  display: block;
+
+  &--liqpay {
+    height: 1.6rem;
+    width: auto;
+  }
+
+  &--card {
+    height: 2.4rem;
+    width: auto;
+  }
+}
+
+// LiqPay ships a dark-text logo and a white one; show whichever the theme needs.
+.mark--on-light {
+  display: none;
+}
+
+:host-context(html[data-theme='light']) {
+  .mark--on-dark {
+    display: none;
+  }
+
+  .mark--on-light {
+    display: block;
+  }
+}

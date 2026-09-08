@@ -178,7 +178,7 @@
 }
 
 .blog-header__title {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: clamp(3.5rem, 10vw, 10rem);
   font-weight: 900;
   line-height: 0.87;
@@ -218,7 +218,7 @@
 }
 
 .count-num {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: 1.15rem;
   font-weight: 800;
   color: var(--accent);
@@ -366,7 +366,7 @@
 }
 
 .featured-post__title {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: clamp(1.9rem, 4vw, 3.5rem);
   font-weight: 800;
   line-height: 1.06;
@@ -397,7 +397,7 @@
   top: 50%;
   right: 2rem;
   transform: translateY(-50%);
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: clamp(7rem, 15vw, 17rem);
   font-weight: 900;
   color: var(--text);
@@ -470,7 +470,7 @@
   position: absolute;
   top: 1rem;
   right: 1.5rem;
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: 5rem;
   font-weight: 900;
   color: var(--text);
@@ -531,7 +531,7 @@
 }
 
 .empty-state__dash {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: 5rem;
   font-weight: 900;
   color: var(--border);

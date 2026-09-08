@@ -1,12 +1,44 @@
 <footer class="ly-footer container">
   <ul class="footer-nav">
     <li><a routerLink="/">{{ 'footer.info' | translate }}</a></li>
+    <li><a routerLink="/services">{{ 'footer.services' | translate }}</a></li>
     <li><a routerLink="/contact">{{ 'footer.contact' | translate }}</a></li>
+    <li><a routerLink="/terms">{{ 'footer.terms' | translate }}</a></li>
+    <li><a routerLink="/privacy">{{ 'footer.privacy' | translate }}</a></li>
   </ul>
   <ul class="footer-social">
     <li><a href="https://www.linkedin.com/in/stepan-lukachyna-837b651b7/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
     <li><a href="https://github.com/amin212121" target="_blank" rel="noopener noreferrer">Github</a></li>
   </ul>
+
+  <!-- Seller identity and accepted payment methods — both required by LiqPay -->
+  <div class="footer-legal">
+    <div class="footer-seller">
+      <div class="footer-seller__label">{{ 'footer.sellerLabel' | translate }}</div>
+      <p class="footer-seller__line" [class.is-placeholder]="!configured">
+        {{ pick(merchant.legalName) }} · {{ pick(taxIdLabel) }} {{ merchant.taxId }}
+      </p>
+      <p class="footer-seller__line" [class.is-placeholder]="!configured">
+        {{ pick(merchant.address) }}
+      </p>
+      <p class="footer-seller__line">
+        <a [href]="'mailto:' + merchant.email">{{ merchant.email }}</a>
+        <span class="footer-seller__sep" aria-hidden="true">·</span>
+        <span [class.is-placeholder]="!configured">{{ merchant.phone }}</span>
+      </p>
+    </div>
+
+    <div class="footer-payments">
+      <div class="footer-seller__label">{{ 'footer.paymentsLabel' | translate }}</div>
+      <div class="footer-marks">
+        <img src="/payment/liqpay-light.svg" alt="LiqPay" class="mark mark--liqpay mark--on-dark" />
+        <img src="/payment/liqpay-dark.svg" alt="LiqPay" class="mark mark--liqpay mark--on-light" />
+        <img src="/payment/visa.svg" alt="Visa" class="mark mark--card" />
+        <img src="/payment/mastercard.svg" alt="Mastercard" class="mark mark--card" />
+      </div>
+    </div>
+  </div>
+
   <div class="footer-copy">{{ 'footer.copy' | translate }}</div>
   <div class="footer-quote">
     <b>{{ 'footer.quoteSuccess' | translate }}</b> {{ 'footer.quoteSuccessText' | translate }}

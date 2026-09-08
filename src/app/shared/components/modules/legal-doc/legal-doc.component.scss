@@ -1,0 +1,243 @@
+// =============================================
+// LEGAL DOCUMENT — shared by offer & privacy
+// Fonts: Big Shoulders Display · Plus Jakarta Sans · DM Mono
+// Rubik carries Cyrillic, which the first two do not cover.
+// =============================================
+
+:host {
+  display: block;
+}
+
+.legal {
+  padding: 5rem 0 7rem;
+}
+
+.legal__inner {
+  max-width: 52rem;
+}
+
+// ─── HEADER ───────────────────────────────────
+
+.legal__head {
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.legal__eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.legal__title {
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  margin-bottom: 1.25rem;
+}
+
+.legal__sub {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 38rem;
+  margin-bottom: 1.5rem;
+}
+
+.legal__updated {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+// ─── CONTENTS ─────────────────────────────────
+
+.legal__toc {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.legal__toc-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+.legal__toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem 2.5rem;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+
+  a {
+    display: flex;
+    gap: 0.9rem;
+    align-items: baseline;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+}
+
+.legal__toc-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+// ─── BODY ─────────────────────────────────────
+
+.legal__body {
+  display: grid;
+  gap: 3.5rem;
+  padding: 3.5rem 0;
+}
+
+.legal__section {
+  scroll-margin-top: 5rem;
+}
+
+.legal__heading {
+  display: flex;
+  gap: 1.1rem;
+  align-items: baseline;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+  text-wrap: balance;
+}
+
+.legal__heading-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.legal__p {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 42rem;
+
+  & + & {
+    margin-top: 1rem;
+  }
+}
+
+.legal__list {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  display: grid;
+  gap: 0.85rem;
+  max-width: 42rem;
+
+  li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--muted);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.8em;
+      width: 0.5rem;
+      height: 1px;
+      background: var(--accent);
+    }
+  }
+}
+
+// ─── SELLER DETAILS ───────────────────────────
+
+.legal__seller {
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  scroll-margin-top: 5rem;
+
+  @media (max-width: 767px) {
+    padding: 1.75rem 1.5rem;
+  }
+}
+
+.legal__heading--seller {
+  margin-bottom: 1.75rem;
+}
+
+.legal__warning {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--ember);
+  border-left: 2px solid var(--ember);
+  padding-left: 0.9rem;
+  margin-bottom: 1.75rem;
+}
+
+.legal__details {
+  display: grid;
+  grid-template-columns: minmax(9rem, auto) 1fr;
+  gap: 0.85rem 2rem;
+  margin: 0;
+
+  @media (max-width: 639px) {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  dt {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.25rem;
+
+    @media (max-width: 639px) {
+      padding-top: 0.75rem;
+    }
+  }
+
+  dd {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+
+    a:hover {
+      color: var(--accent);
+    }
+  }
+}

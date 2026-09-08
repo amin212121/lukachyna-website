@@ -1,0 +1,142 @@
+<!-- ─── HERO ──────────────────────────────────────────── -->
+<section class="svc-hero">
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="container svc-hero__inner">
+    <div class="svc-hero__eyebrow">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>{{ 'services.eyebrow' | translate }}</span>
+    </div>
+
+    <h1 class="svc-hero__headline">{{ 'services.headline' | translate }}</h1>
+    <p class="svc-hero__sub">{{ 'services.sub' | translate }}</p>
+  </div>
+</section>
+
+<!-- ─── MAIN SERVICE ──────────────────────────────────── -->
+<section class="container svc-main">
+  <div class="svc-label">{{ 'services.mainLabel' | translate }}</div>
+
+  <article class="offer offer--featured">
+    <h2 class="offer__name offer__name--featured">{{ pick(featured.name) }}</h2>
+
+    <div class="offer__grid">
+      <div class="offer__detail">
+        <p class="offer__summary offer__summary--featured">{{ pick(featured.summary) }}</p>
+
+        <div class="offer__block">
+          <div class="offer__label">{{ 'services.includesLabel' | translate }}</div>
+          <ul class="offer__includes">
+            @for (item of pick(featured.includes); track $index) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="offer__block">
+          <div class="offer__label">{{ 'services.deliveryLabel' | translate }}</div>
+          <p class="offer__turnaround">{{ pick(featured.turnaround) }}</p>
+        </div>
+      </div>
+
+      <div class="offer__buy">
+        <div class="offer__label">{{ 'services.priceLabel' | translate }}</div>
+        <div class="offer__price">
+          <span class="offer__amount">{{ formatPrice(featured.price) }}</span>
+          <span class="offer__currency">&#8372;</span>
+        </div>
+        @if (featured.priceNote) {
+          <p class="offer__price-note">{{ pick(featured.priceNote) }}</p>
+        }
+
+        <a routerLink="/contact" class="offer__cta">{{ 'services.orderCta' | translate }}</a>
+        <p class="offer__cta-note">{{ 'services.orderNote' | translate }}</p>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ─── ADDITIONAL SERVICES ───────────────────────────── -->
+<section class="container svc-list">
+  <div class="svc-label">{{ 'services.additionalLabel' | translate }}</div>
+
+  @for (service of additional; track service.id) {
+    <article class="offer">
+
+      <div class="offer__head">
+        <span class="offer__num" aria-hidden="true">{{ padIndex($index) }}</span>
+        <h2 class="offer__name">{{ pick(service.name) }}</h2>
+      </div>
+
+      <div class="offer__grid">
+        <div class="offer__detail">
+          <p class="offer__summary">{{ pick(service.summary) }}</p>
+
+          <div class="offer__block">
+            <div class="offer__label">{{ 'services.includesLabel' | translate }}</div>
+            <ul class="offer__includes">
+              @for (item of pick(service.includes); track $index) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </div>
+
+          <div class="offer__block">
+            <div class="offer__label">{{ 'services.deliveryLabel' | translate }}</div>
+            <p class="offer__turnaround">{{ pick(service.turnaround) }}</p>
+          </div>
+        </div>
+
+        <div class="offer__buy">
+          <div class="offer__label">{{ 'services.priceLabel' | translate }}</div>
+          <div class="offer__price">
+            <span class="offer__amount">{{ formatPrice(service.price) }}</span>
+            <span class="offer__currency">&#8372;</span>
+          </div>
+          @if (service.priceNote) {
+            <p class="offer__price-note">{{ pick(service.priceNote) }}</p>
+          }
+
+          <a routerLink="/contact" class="offer__cta">{{ 'services.orderCta' | translate }}</a>
+        </div>
+      </div>
+    </article>
+  }
+</section>
+
+<!-- ─── HOW TO ORDER & PAYMENT ────────────────────────── -->
+<section class="svc-payment">
+  <div class="container svc-payment__inner">
+
+    <div class="svc-payment__steps">
+      <h2 class="svc-payment__title">{{ 'services.howToOrderTitle' | translate }}</h2>
+      <ol class="steps">
+        @for (step of steps; track step) {
+          <li class="step">
+            <span class="step__num" aria-hidden="true">{{ padIndex($index) }}</span>
+            <span class="step__text">{{ step | translate }}</span>
+          </li>
+        }
+      </ol>
+    </div>
+
+    <div class="svc-payment__text">
+      <h2 class="svc-payment__title">{{ 'services.paymentTitle' | translate }}</h2>
+      <p class="svc-payment__body">{{ 'services.paymentBody' | translate }}</p>
+      <p class="svc-payment__terms">
+        {{ 'services.termsNote' | translate }}
+        <a routerLink="/terms">{{ 'services.termsLink' | translate }}</a>
+        {{ 'services.andThe' | translate }}
+        <a routerLink="/privacy">{{ 'services.privacyLink' | translate }}</a>.
+      </p>
+
+      <div class="svc-payment__marks">
+        <img src="/payment/liqpay-light.svg" alt="LiqPay" class="mark mark--liqpay mark--on-dark" />
+        <img src="/payment/liqpay-dark.svg" alt="LiqPay" class="mark mark--liqpay mark--on-light" />
+        <img src="/payment/visa.svg" alt="Visa" class="mark mark--card" />
+        <img src="/payment/mastercard.svg" alt="Mastercard" class="mark mark--card" />
+      </div>
+    </div>
+
+  </div>
+</section>

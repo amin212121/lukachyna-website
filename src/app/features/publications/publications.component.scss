@@ -67,7 +67,7 @@
 }
 
 .pub-header__title {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: clamp(3.5rem, 10vw, 10rem);
   font-weight: 900;
   line-height: 0.87;
@@ -105,7 +105,7 @@
 }
 
 .stat__num {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
   color: var(--accent);
@@ -289,7 +289,7 @@
 }
 
 .pub-entry__year {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: 2rem;
   font-weight: 800;
   color: var(--muted);
@@ -468,7 +468,7 @@
 }
 
 .empty-state__dash {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'Oswald', sans-serif;
   font-size: 5rem;
   font-weight: 900;
   color: rgba(255, 255, 255, 0.05);
